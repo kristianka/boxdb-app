@@ -1,22 +1,29 @@
 import "./App.css";
 import { useState } from "react";
-import { Box } from "../types";
+import { Box, SortType } from "./types";
 import Header from "./components/Header";
 import Search from "./components/Search";
 import BoxDetails from "./components/BoxDetails";
 import BoxList from "./components/BoxList";
-import { boxes } from "./dummydata";
+import { boxes as dummyBoxes } from "./dummydata";
 import Sort from "./components/Buttons/Sort";
 import Refresh from "./components/Buttons/Refresh";
 import NewBox from "./components/Buttons/NewBox";
+import { sortBoxes } from "./components/Buttons/sortLogic";
 
 function App() {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [boxes, setBoxes] = useState<Box[]>(dummyBoxes);
   const [selectedBox, setSelectedBox] = useState<Box>();
   const [search, setSearch] = useState("");
+  const [sort, setSort] = useState<SortType>("modifiedNewest");
+
+  // sort boxes by user choice. default is modified newest
+  const sortedBoxes = sortBoxes(boxes, sort);
 
   // Filter boxes based on search input
   // updating the list as the user types. not case-sensitive
-  const filteredBoxes = boxes.filter((box) => {
+  const filteredBoxes = sortedBoxes.filter((box) => {
     return (
       search === "" || box.comment?.toLowerCase().includes(search.toLowerCase())
     );
@@ -31,7 +38,7 @@ function App() {
             <h2 className="mb-5 text-xl">Entries</h2>
             <div className="flex">
               <Search setSearch={setSearch} />
-              <Sort />
+              <Sort sort={sort} setSort={setSort} />
               <NewBox />
               <Refresh />
             </div>

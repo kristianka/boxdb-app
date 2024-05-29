@@ -1,4 +1,4 @@
-import { Box } from "../types";
+import { Box } from "./types";
 
 export const boxes: Box[] = [
   {
@@ -137,6 +137,7 @@ export const boxes: Box[] = [
     length: 165,
     comment: "Box 28",
     addedAt: "2024-05-07T12:00:00Z",
+    modifiedAt: "2024-05-31T13:00:00Z",
   },
   {
     id: "missing",
@@ -144,6 +145,7 @@ export const boxes: Box[] = [
     depth: 160,
     length: 170,
     addedAt: "2024-05-08T12:00:00Z",
+    modifiedAt: "2021-05-21T13:00:00Z",
   },
   {
     id: "16326340",

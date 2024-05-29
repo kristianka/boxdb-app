@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Box } from "../../types";
+import { Box } from "../types";
 
 interface props {
   box: Box;

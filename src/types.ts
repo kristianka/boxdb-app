@@ -7,3 +7,11 @@ export interface Box {
   addedAt: string;
   modifiedAt?: string;
 }
+
+export type SortType =
+  | "modifiedNewest"
+  | "modifiedOldest"
+  | "addedNewest"
+  | "addedOldest"
+  | "idAscending"
+  | "idDescending";
