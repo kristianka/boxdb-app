@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { Box } from "../types";
+import { isValid } from "../misc";
+import ErrorMessage from "./ErrorMessage";
 
 interface props {
   box: Box;
@@ -13,6 +15,7 @@ const BoxDetails = ({ box }: props) => {
   const [comment, setComment] = useState("");
 
   const [reset, setReset] = useState(false);
+  const [error, setError] = useState(false);
 
   const undoChanges = () => {
     // Toggle reset state to trigger useEffect
@@ -45,7 +48,14 @@ const BoxDetails = ({ box }: props) => {
   }, [box, reset]);
 
   const saveChanges = () => {
+    if (!isValid(height, depth, length)) {
+      console.log("not valid");
+      setError(true);
+      return;
+    }
     console.log("save changes");
+    // db call to update box
+    setError(false);
   };
 
   return (
@@ -90,6 +100,13 @@ const BoxDetails = ({ box }: props) => {
             </button>
           </div>
         </div>
+        {error && (
+          <ErrorMessage
+            title="Error while modifying."
+            description="Make sure all values are numbers, greater than 0, and not empty."
+          />
+        )}
+
         <div className="mb-5 mt-3">
           <p>Added at {new Date(box.addedAt).toLocaleString()}</p>
           {box.modifiedAt && (
@@ -98,9 +115,9 @@ const BoxDetails = ({ box }: props) => {
         </div>
         <form action="">
           <div className="mb-3">
-            <label htmlFor="height">Height: </label>
+            <label htmlFor="height">Height:</label>
             <input
-              className="w-full rounded-md border-2 border-gray-300 p-2"
+              className="mt-2 w-full rounded-md border-2 border-gray-300 bg-gray-50 p-2"
               name="height"
               type="number"
               value={height}
@@ -110,7 +127,7 @@ const BoxDetails = ({ box }: props) => {
           <div className="mb-3">
             <label htmlFor="depth">Depth: </label>
             <input
-              className="w-full rounded-md border-2 border-gray-300 p-2"
+              className="mt-2 w-full rounded-md border-2 border-gray-300 bg-gray-50 p-2"
               name="depth"
               type="number"
               value={depth}
@@ -120,7 +137,7 @@ const BoxDetails = ({ box }: props) => {
           <div className="mb-3">
             <label htmlFor="length">Length: </label>
             <input
-              className="w-full rounded-md border-2 border-gray-300 p-2"
+              className="mt-2 w-full rounded-md border-2 border-gray-300 bg-gray-50 p-2"
               name="length"
               type="number"
               value={length}
@@ -130,7 +147,7 @@ const BoxDetails = ({ box }: props) => {
           <div className="mb-3">
             <label htmlFor="comment">Comment: </label>
             <textarea
-              className="w-full rounded-md border-2 border-gray-300 p-2"
+              className="mt-2 w-full rounded-md border-2 border-gray-300 bg-gray-50 p-2"
               name="comment"
               value={comment}
               onChange={(e) => setComment(e.target.value)}
@@ -140,7 +157,7 @@ const BoxDetails = ({ box }: props) => {
           <button
             type="button"
             title="Save changes"
-            className="mb-5 inline-flex items-center rounded-lg border border-gray-300 bg-gray-50 px-5 py-2.5 text-center text-sm font-medium hover:bg-green-500"
+            className="mb-5 inline-flex items-center rounded-lg border border-gray-300 bg-gray-50 px-5 py-2.5 text-center text-sm font-medium hover:bg-green-400"
             onClick={saveChanges}
           >
             <svg
