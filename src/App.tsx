@@ -10,6 +10,7 @@ import Sort from "./components/Buttons/Sort";
 import Refresh from "./components/Buttons/Refresh";
 import NewBox from "./components/Buttons/NewBox";
 import { sortBoxes } from "./components/Buttons/sortLogic";
+import PaginationCount from "./components/Buttons/PaginationCount";
 
 function App() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -17,6 +18,8 @@ function App() {
   const [selectedBox, setSelectedBox] = useState<Box>();
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState<SortType>("modifiedNewest");
+
+  const [pagination, setPagination] = useState(10);
 
   // sort boxes by user choice. default is modified newest
   const sortedBoxes = sortBoxes(boxes, sort);
@@ -38,12 +41,17 @@ function App() {
             <h2 className="mb-5 text-xl">Entries</h2>
             <div className="flex">
               <Search setSearch={setSearch} />
+              <PaginationCount
+                pagination={pagination}
+                setPagination={setPagination}
+              />
               <Sort sort={sort} setSort={setSort} />
               <NewBox />
               <Refresh />
             </div>
           </div>
           <BoxList
+            pagination={pagination}
             setSelectedBox={setSelectedBox}
             filteredBoxes={filteredBoxes}
           />

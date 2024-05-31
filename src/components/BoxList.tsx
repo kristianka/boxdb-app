@@ -5,13 +5,14 @@ import BoxListItem from "./BoxListItem";
 import { useState } from "react";
 
 interface props {
+  pagination: number;
   filteredBoxes: Box[];
   setSelectedBox: (box: Box) => void;
 }
 
-const BoxList = ({ filteredBoxes, setSelectedBox }: props) => {
+const BoxList = ({ pagination, filteredBoxes, setSelectedBox }: props) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10; // Change this to control how many boxes are displayed per page
+  const itemsPerPage = pagination;
 
   const onPageChange = (page: number) => setCurrentPage(page);
 
