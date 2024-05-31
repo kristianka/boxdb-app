@@ -19,12 +19,24 @@ describe("BoxList", () => {
   });
 
   test("renders without crashing", () => {
-    render(<BoxList filteredBoxes={[]} setSelectedBox={() => {}} />);
+    render(
+      <BoxList
+        pagination={paginationLength}
+        filteredBoxes={[]}
+        setSelectedBox={() => {}}
+      />,
+    );
   });
 
   test("renders the correct number of BoxListItem components", () => {
     const boxes = dummydata;
-    render(<BoxList filteredBoxes={boxes} setSelectedBox={mockHandler} />);
+    render(
+      <BoxList
+        pagination={paginationLength}
+        filteredBoxes={boxes}
+        setSelectedBox={mockHandler}
+      />,
+    );
     const items = screen.getAllByTestId("BoxListItem");
     expect(items.length).toBe(paginationLength);
   });
@@ -33,7 +45,11 @@ describe("BoxList", () => {
     const boxes = dummydata;
 
     const { getByText, findAllByTestId } = render(
-      <BoxList filteredBoxes={boxes} setSelectedBox={mockHandler} />,
+      <BoxList
+        pagination={paginationLength}
+        filteredBoxes={boxes}
+        setSelectedBox={mockHandler}
+      />,
     );
     const nextPageButton = getByText("Next");
     const prevPageButton = getByText("Previous");
