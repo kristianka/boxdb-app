@@ -13,6 +13,7 @@ const BoxListItem = ({ box, setSelectedBox }: props) => {
 
   return (
     <button
+      data-testid="BoxListItem"
       onClick={setSelected}
       className="mb-2 w-full rounded-md bg-white p-2 text-left hover:bg-gray-100"
       title={box.comment ? box.comment : "No comment"}

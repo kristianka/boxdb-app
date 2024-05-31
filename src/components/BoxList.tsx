@@ -28,6 +28,7 @@ const BoxList = ({ filteredBoxes, setSelectedBox }: props) => {
       ))}
       <div className="mt-4 flex overflow-x-auto sm:justify-center">
         <Pagination
+          data-testid="pagination"
           currentPage={currentPage}
           totalPages={Math.ceil(filteredBoxes.length / itemsPerPage)}
           onPageChange={onPageChange}
