@@ -1,5 +1,5 @@
 import "./App.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Box, SortType } from "./types";
 import Header from "./components/Header";
 import Search from "./components/Search";
@@ -11,20 +11,8 @@ import Refresh from "./components/Buttons/Refresh";
 import NewBox from "./components/Buttons/NewBox";
 import { sortBoxes } from "./components/Buttons/sortLogic";
 import PaginationCount from "./components/Buttons/PaginationCount";
-import { connectToDb } from "./dbConnection";
 
 function App() {
-  // const [dbConnected, setDbConnected] = useState(false);
-
-  // useEffect(() => {
-  //   const connect = async () => {
-  //     const connected = await connectToDb();
-  //     console.log("connected", connected);
-  //     setDbConnected(connected);
-  //   };
-  //   connect();
-  // }, []);
-
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [boxes, setBoxes] = useState<Box[]>(dummyBoxes);
   const [selectedBox, setSelectedBox] = useState<Box>();
