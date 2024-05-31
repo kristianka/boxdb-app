@@ -1,0 +1,32 @@
+name: Frontend Vitest tests
+
+on:
+    push:
+        branches:
+            - main
+        paths-ignore:
+            - "documentation/**"
+
+    pull_request:
+        branches: [main]
+        types: [opened, synchronize]
+        paths-ignore:
+            - "documentation/**"
+
+jobs:
+    test:
+        runs-on: ubuntu-22.04
+        steps:
+            - uses: actions/checkout@v3
+            - uses: actions/setup-node@v3
+              with:
+                  node-version: "20"
+
+            - name: Install dependencies for frontend
+              run: cd frontend && npm install && cd ..
+
+            # - name: Lint frontend
+            #   run: cd frontend && npm run lint && cd ..
+
+            - name: Run frontend tests
+              run: cd frontend && npm run test && cd ..
