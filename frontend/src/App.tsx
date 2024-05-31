@@ -14,16 +14,16 @@ import PaginationCount from "./components/Buttons/PaginationCount";
 import { connectToDb } from "./dbConnection";
 
 function App() {
-  const [dbConnected, setDbConnected] = useState(false);
+  // const [dbConnected, setDbConnected] = useState(false);
 
-  useEffect(() => {
-    const connect = async () => {
-      const connected = await connectToDb();
-      console.log("connected", connected);
-      setDbConnected(connected);
-    };
-    connect();
-  }, []);
+  // useEffect(() => {
+  //   const connect = async () => {
+  //     const connected = await connectToDb();
+  //     console.log("connected", connected);
+  //     setDbConnected(connected);
+  //   };
+  //   connect();
+  // }, []);
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [boxes, setBoxes] = useState<Box[]>(dummyBoxes);
