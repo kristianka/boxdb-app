@@ -3,7 +3,7 @@
 Full Stack application that let's you store box dimensions. Database hosted with Microsoft SQL inside Docker, which is run on a Raspberry Pi 4. [See here for images!](#images)
 
 > [!NOTE]
-This is still very work in progress, and many things will change like backend structure and adding proper tests. This project will be finished by mid-June.
+This is still very work in progress, and many things will change like backend structure and adding proper tests. This project will be finished by mid-June and the readme will be updating again then with more instructions and information.
 
 
 ## Info
@@ -55,8 +55,3 @@ On small screens, the right one is after scrolling down
   <img src="https://github.com/kristianka/boxdb-app/assets/49764796/0747a8d8-3466-47b2-875f-063ddbff93b7" width="400" /> 
 </p>
 
-
-
-
-
-Images TBD
