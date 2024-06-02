@@ -15,7 +15,7 @@ This is still very work in progress, and many things will change like backend st
 - Will be Dockerized
 
 ### Frontend features
-- Form validation 
+- Proper form validation with feedback (will also be in backend of course)
 - The application is fully responsive to all screen types.
   - Note how the table removes some rows when the screen gets smaller, buttons don't overflow but go to a new line, text doesn't overflow, box information goes below the table and not side-by-side, and other small changes happen.
 - Custom made components that follow guidelines
