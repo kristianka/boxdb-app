@@ -41,7 +41,7 @@ This is still very work in progress, and many things will change like backend st
 - Install dependencies `npm install`
 - Run with `npm run dev`
 
-## Running the database
+### Running the database
  Replace `<PASSWORD>` with a secure password. `docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<PASSWORD>" -e "MSSQL_PID=Express" -p 1433:1433 -v box-db:/var/opt/mssql -d mcr.microsoft.com/mssql/server:2019-latest`. This command opens the database to port `1433`.
 
 # Images
