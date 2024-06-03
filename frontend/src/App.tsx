@@ -11,6 +11,9 @@ import NewBox from "./components/Buttons/NewBox";
 import { sortBoxes } from "./components/Buttons/sortLogic";
 import PaginationCount from "./components/Buttons/PaginationCount";
 import { getBoxes } from "./services/boxes";
+import ErrorMessage from "./components/ErrorMessage";
+
+const address = import.meta.env.VITE_BACKEND_URL;
 
 function App() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -19,14 +22,20 @@ function App() {
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState<SortType>("modifiedNewest");
 
+  const [error, setError] = useState<boolean>(false);
+
   const [pagination, setPagination] = useState(10);
 
   useEffect(() => {
     const fetchBoxes = async () => {
+      if (!address) return;
       const boxes = await getBoxes();
       console.log(boxes);
       setBoxes(boxes);
     };
+    if (!address) {
+      setError(true);
+    }
     fetchBoxes();
   }, []);
 
@@ -41,6 +50,8 @@ function App() {
       search === "" || box.comment?.toLowerCase().includes(search.toLowerCase())
     );
   });
+
+  console.log(boxes);
   return (
     <div className="flex min-h-screen flex-col bg-slate-50">
       <Header />
@@ -59,11 +70,18 @@ function App() {
               <Refresh />
             </div>
           </div>
-          <BoxList
-            pagination={pagination}
-            setSelectedBox={setSelectedBox}
-            filteredBoxes={filteredBoxes}
-          />
+          {error ? (
+            <ErrorMessage
+              title="Error!"
+              description="Backend URL not found. Please check your .env file."
+            />
+          ) : (
+            <BoxList
+              pagination={pagination}
+              setSelectedBox={setSelectedBox}
+              filteredBoxes={filteredBoxes}
+            />
+          )}
         </div>
         <div className="m-3 md:order-2 md:col-span-2">
           <h2 className="mb-5 text-xl">Detailed info</h2>

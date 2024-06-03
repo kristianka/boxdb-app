@@ -24,18 +24,30 @@ const BoxList = ({ pagination, filteredBoxes, setSelectedBox }: props) => {
   return (
     <div>
       <BoxListHeaders />
-      {displayedBoxes.map((box) => (
-        <BoxListItem key={box.id} box={box} setSelectedBox={setSelectedBox} />
-      ))}
-      <div className="mt-4 flex overflow-x-auto sm:justify-center">
-        <Pagination
-          data-testid="pagination"
-          currentPage={currentPage}
-          totalPages={Math.ceil(filteredBoxes.length / itemsPerPage)}
-          onPageChange={onPageChange}
-          showIcons
-        />
-      </div>
+      {filteredBoxes.length === 0 ? (
+        <div className="mt-4 text-center text-gray-500">
+          No boxes found. Is the backend running?
+        </div>
+      ) : (
+        <>
+          {displayedBoxes.map((box) => (
+            <BoxListItem
+              key={box.id}
+              box={box}
+              setSelectedBox={setSelectedBox}
+            />
+          ))}
+          <div className="mt-4 flex overflow-x-auto sm:justify-center">
+            <Pagination
+              data-testid="pagination"
+              currentPage={currentPage}
+              totalPages={Math.ceil(filteredBoxes.length / itemsPerPage)}
+              onPageChange={onPageChange}
+              showIcons
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 };

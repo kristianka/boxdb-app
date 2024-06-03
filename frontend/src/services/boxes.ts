@@ -1,7 +1,6 @@
 import axios from "axios";
 import { Box } from "../types";
-
-const address = "http://localhost:3000";
+const address = import.meta.env.VITE_BACKEND_URL;
 
 export const getBoxes = async () => {
   const res = await axios<Box[]>(`${address}/boxes`);
