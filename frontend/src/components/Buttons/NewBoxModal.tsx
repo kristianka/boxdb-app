@@ -10,9 +10,9 @@ interface props {
 
 const NewBoxModal = ({ openModal, setOpenModal }: props) => {
   // height, depth, and length are strings not nums so inputs work better
+  const [width, setWidth] = useState("");
   const [height, setHeight] = useState("");
   const [depth, setDepth] = useState("");
-  const [length, setLength] = useState("");
   const [comment, setComment] = useState("");
 
   const [error, setError] = useState(false);
@@ -22,12 +22,12 @@ const NewBoxModal = ({ openModal, setOpenModal }: props) => {
   }
 
   const addBox = () => {
+    const widthNum = Number(width);
     const heightNum = Number(height);
     const depthNum = Number(depth);
-    const lengthNum = Number(length);
 
     console.log("add box");
-    if (!isValid(heightNum, depthNum, lengthNum)) {
+    if (!isValid(widthNum, heightNum, depthNum)) {
       console.log("not valid");
       setError(true);
       return;
@@ -36,10 +36,11 @@ const NewBoxModal = ({ openModal, setOpenModal }: props) => {
     console.log("add box");
     // db call to add box
     // reset values
+    setWidth("");
     setHeight("");
     setDepth("");
-    setLength("");
     setComment("");
+
     setError(false);
     setOpenModal(false);
   };
@@ -65,6 +66,23 @@ const NewBoxModal = ({ openModal, setOpenModal }: props) => {
                 description="Make sure all values are numbers, greater than 0, and not empty."
               />
             )}
+            {/* width */}
+            <div>
+              <div className="mb-2 block">
+                <Label htmlFor="length" value="Width" />
+              </div>
+              <TextInput
+                placeholder="Enter width"
+                min={0}
+                max={10000}
+                type="number"
+                id="with"
+                value={length}
+                onChange={(event) => setWidth(event.target.value)}
+                required
+              />
+            </div>
+            {/* height */}
             <div>
               <div className="mb-2 block">
                 <Label htmlFor="height" value="Height" />
@@ -80,6 +98,7 @@ const NewBoxModal = ({ openModal, setOpenModal }: props) => {
                 required
               />
             </div>
+            {/* depth */}
             <div>
               <div className="mb-2 block">
                 <Label htmlFor="depth" value="Depth" />
@@ -95,22 +114,7 @@ const NewBoxModal = ({ openModal, setOpenModal }: props) => {
                 required
               />
             </div>
-            <div>
-              <div className="mb-2 block">
-                <Label htmlFor="length" value="Length" />
-              </div>
-              <TextInput
-                placeholder="Enter length"
-                min={0}
-                max={10000}
-                type="number"
-                id="length"
-                value={length}
-                onChange={(event) => setLength(event.target.value)}
-                required
-              />
-            </div>
-
+            {/* comment */}
             <div>
               <div className="mb-2 block">
                 <Label htmlFor="comment" value="Comment" />
@@ -124,6 +128,7 @@ const NewBoxModal = ({ openModal, setOpenModal }: props) => {
                 onChange={(e) => setComment(e.target.value)}
               />
             </div>
+            {/* submit */}
             <div className="w-full">
               <Button onClick={addBox}>Add</Button>
             </div>

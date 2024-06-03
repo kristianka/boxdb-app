@@ -1,8 +1,8 @@
 export interface Box {
   id: string;
+  width: number;
   height: number;
   depth: number;
-  length: number;
   comment?: string;
   addedAt: string;
   modifiedAt?: string;

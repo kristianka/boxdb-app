@@ -9,9 +9,10 @@ interface props {
 
 const BoxDetails = ({ box }: props) => {
   const id = box.id;
+
+  const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
   const [depth, setDepth] = useState(0);
-  const [length, setLength] = useState(0);
   const [comment, setComment] = useState("");
 
   const [reset, setReset] = useState(false);
@@ -41,14 +42,14 @@ const BoxDetails = ({ box }: props) => {
 
   // update values when selected box changes
   useEffect(() => {
+    setWidth(box.width);
     setHeight(box.height);
     setDepth(box.depth);
-    setLength(box.length);
     setComment(box.comment || "");
   }, [box, reset]);
 
   const saveChanges = () => {
-    if (!isValid(height, depth, length)) {
+    if (!isValid(width, height, depth)) {
       console.log("not valid");
       setError(true);
       return;
@@ -114,6 +115,18 @@ const BoxDetails = ({ box }: props) => {
           )}
         </div>
         <form action="">
+          {/* width */}
+          <div className="mb-3">
+            <label htmlFor="width">Width: </label>
+            <input
+              className="mt-2 w-full rounded-md border-2 border-gray-300 bg-gray-50 p-2"
+              name="width"
+              type="number"
+              value={length}
+              onChange={(e) => setWidth(parseInt(e.target.value))}
+            />
+          </div>
+          {/* height */}
           <div className="mb-3">
             <label htmlFor="height">Height:</label>
             <input
@@ -124,6 +137,7 @@ const BoxDetails = ({ box }: props) => {
               onChange={(e) => setHeight(parseInt(e.target.value))}
             />
           </div>
+          {/* depth */}
           <div className="mb-3">
             <label htmlFor="depth">Depth: </label>
             <input
@@ -134,16 +148,7 @@ const BoxDetails = ({ box }: props) => {
               onChange={(e) => setDepth(parseInt(e.target.value))}
             />
           </div>
-          <div className="mb-3">
-            <label htmlFor="length">Length: </label>
-            <input
-              className="mt-2 w-full rounded-md border-2 border-gray-300 bg-gray-50 p-2"
-              name="length"
-              type="number"
-              value={length}
-              onChange={(e) => setLength(parseInt(e.target.value))}
-            />
-          </div>
+          {/* comment */}
           <div className="mb-3">
             <label htmlFor="comment">Comment: </label>
             <textarea
@@ -154,6 +159,7 @@ const BoxDetails = ({ box }: props) => {
               rows={5}
             />
           </div>
+          {/* submit */}
           <button
             type="button"
             title="Save changes"
