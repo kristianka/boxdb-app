@@ -12,7 +12,7 @@ const fastify = Fastify({
 
 // to do change to env variable
 fastify.register(cors, {
-    origin: "http://localhost:5173"
+    origin: process.env.FRONTEND_URL
 });
 
 const PORT = Number(process.env.PORT) || 3000;
@@ -37,6 +37,9 @@ fastify.get("/boxes", async function handler(request, reply) {
 
 const start = async () => {
     try {
+        if (!process.env.FRONTEND_URL) {
+            throw new Error("FRONTEND_URL is not set");
+        }
         if (!process.env.DATABASE_URL) {
             throw new Error("DATABASE_URL is not set");
         }
