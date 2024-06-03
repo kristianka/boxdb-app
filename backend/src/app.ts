@@ -1,13 +1,18 @@
 import Fastify from "fastify";
 import { PrismaClient } from "@prisma/client";
 import dotenv from "dotenv";
-
+import cors from "@fastify/cors";
 dotenv.config();
 
 const prisma = new PrismaClient();
 
 const fastify = Fastify({
     logger: true
+});
+
+// to do change to env variable
+fastify.register(cors, {
+    origin: "http://localhost:5173"
 });
 
 const PORT = Number(process.env.PORT) || 3000;
