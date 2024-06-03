@@ -21,13 +21,13 @@ const BoxListItem = ({ box, setSelectedBox }: props) => {
       <div className="grid grid-cols-4 md:grid-cols-5">
         <p className="truncate">{box.id}</p>
         <p className="truncate">
-          {box.height} x {box.depth} x {box.length}
+          {box.width} x {box.height} x {box.depth}
         </p>
-        <p className="truncate">{new Date(box.addedAt).toLocaleString()}</p>
+        <p className="truncate">{new Date(box.createdAt).toLocaleString()}</p>
         <div className="hidden md:block">
-          {box.modifiedAt ? (
+          {box.updatedAt !== box.createdAt ? (
             <p className="truncate">
-              {new Date(box.modifiedAt).toLocaleString()}
+              {new Date(box.updatedAt).toLocaleString()}
             </p>
           ) : (
             <p className="truncate italic text-gray-600">Not modified</p>

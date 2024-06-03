@@ -109,9 +109,9 @@ const BoxDetails = ({ box }: props) => {
         )}
 
         <div className="mb-5 mt-3">
-          <p>Added at {new Date(box.addedAt).toLocaleString()}</p>
-          {box.modifiedAt && (
-            <p>Modified at {new Date(box.modifiedAt).toLocaleString()}</p>
+          <p>Added at {new Date(box.createdAt).toLocaleString()}</p>
+          {box.updatedAt !== box.createdAt && (
+            <p>Modified at {new Date(box.updatedAt).toLocaleString()}</p>
           )}
         </div>
         <form action="">

@@ -4,8 +4,8 @@ export interface Box {
   height: number;
   depth: number;
   comment?: string;
-  addedAt: string;
-  modifiedAt?: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export type SortType =
