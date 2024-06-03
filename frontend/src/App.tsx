@@ -1,28 +1,38 @@
 import "./App.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Box, SortType } from "./types";
 import Header from "./components/Header";
 import Search from "./components/Search";
 import BoxDetails from "./components/BoxDetails";
 import BoxList from "./components/BoxList";
-import { boxes as dummyBoxes } from "./dummydata";
 import Sort from "./components/Buttons/Sort";
 import Refresh from "./components/Buttons/Refresh";
 import NewBox from "./components/Buttons/NewBox";
 import { sortBoxes } from "./components/Buttons/sortLogic";
 import PaginationCount from "./components/Buttons/PaginationCount";
+import { getBoxes } from "./services/boxes";
 
 function App() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [boxes, setBoxes] = useState<Box[]>(dummyBoxes);
+  const [boxes, setBoxes] = useState<Box[]>();
   const [selectedBox, setSelectedBox] = useState<Box>();
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState<SortType>("modifiedNewest");
 
   const [pagination, setPagination] = useState(10);
 
-  // sort boxes by user choice. default is modified newest
-  const sortedBoxes = sortBoxes(boxes, sort);
+  useEffect(() => {
+    const fetchBoxes = async () => {
+      const boxes = await getBoxes();
+      console.log(boxes);
+      setBoxes(boxes);
+    };
+    fetchBoxes();
+  }, []);
+
+  // sort boxes by user choice. default is modified newest.
+  // send empty array if boxes is undefined
+  const sortedBoxes = sortBoxes(boxes ?? [], sort);
 
   // Filter boxes based on search input
   // updating the list as the user types. not case-sensitive
