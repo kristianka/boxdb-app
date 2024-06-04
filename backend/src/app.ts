@@ -1,7 +1,8 @@
-import Fastify from "fastify";
+import Fastify, { FastifySchema } from "fastify";
 import { PrismaClient } from "@prisma/client";
 import dotenv from "dotenv";
 import cors from "@fastify/cors";
+import { Box } from "./types";
 dotenv.config();
 
 const prisma = new PrismaClient();
@@ -10,7 +11,6 @@ const fastify = Fastify({
     logger: true
 });
 
-// to do change to env variable
 fastify.register(cors, {
     origin: process.env.FRONTEND_URL
 });
@@ -25,8 +25,9 @@ fastify.get("/", async function handler(request, reply) {
 
 fastify.get("/boxes", async function handler(request, reply) {
     try {
-        const boxes = prisma.boxes.findMany();
-        return boxes;
+        const boxes = await prisma.boxes.findMany();
+        console.log("Boxes: ", boxes);
+        reply.code(200);
     } catch (error) {
         reply.code(500).send({
             error: "Internal Server Error. Read the server console for more information."
@@ -34,6 +35,40 @@ fastify.get("/boxes", async function handler(request, reply) {
         console.log("An error occurred while fetching boxes: \n", error);
     }
 });
+
+const boxSchema: FastifySchema = {
+    body: {
+        type: "object",
+        properties: {
+            width: { type: "number" },
+            height: { type: "number" },
+            depth: { type: "number" },
+            comment: { type: "string" }
+        },
+        required: ["width", "height", "depth"]
+    }
+};
+
+fastify.post<{ Body: Box }>(
+    "/boxes",
+    { schema: boxSchema },
+    async function handler(request, reply) {
+        try {
+            const { width, height, depth, comment } = request.body;
+
+            const box = await prisma.boxes.create({
+                data: {
+                    width,
+                    height,
+                    depth,
+                    comment
+                }
+            });
+
+            reply.code(201).send(box);
+        } catch (error) {}
+    }
+);
 
 const start = async () => {
     try {
