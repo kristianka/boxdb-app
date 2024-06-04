@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+// prevents infinite loops with useEffects
 import "./App.css";
 import "./i18n/config";
 import { useEffect, useState } from "react";
