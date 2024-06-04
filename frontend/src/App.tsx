@@ -17,7 +17,6 @@ import { toast } from "react-toastify";
 const address = import.meta.env.VITE_BACKEND_URL;
 
 function App() {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [boxes, setBoxes] = useState<Box[]>();
   const [selectedBox, setSelectedBox] = useState<Box>();
   const [search, setSearch] = useState("");

@@ -12,4 +12,4 @@ export const addBox = async (box: Box) => {
   const res = await axios.post(`${address}/boxes`, box);
   const newBox = res.data;
   return newBox;
-}
+};
