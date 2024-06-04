@@ -26,8 +26,7 @@ fastify.get("/", async function handler(request, reply) {
 fastify.get("/boxes", async function handler(request, reply) {
     try {
         const boxes = await prisma.boxes.findMany();
-        console.log("Boxes: ", boxes);
-        reply.code(200);
+        reply.code(200).send(boxes);
     } catch (error) {
         reply.code(500).send({
             error: "Internal Server Error. Read the server console for more information."
@@ -66,7 +65,12 @@ fastify.post<{ Body: Box }>(
             });
 
             reply.code(201).send(box);
-        } catch (error) {}
+        } catch (error) {
+            reply.code(500).send({
+                error: "Internal Server Error. Read the server console for more information."
+            });
+            console.log("An error occurred while creating a box: \n", error);
+        }
     }
 );
 
