@@ -1,4 +1,4 @@
-name: Frontend Vitest tests
+name: Frontend lint and tests
 
 on:
     push:
