@@ -1,8 +1,12 @@
+import { useTranslation } from "react-i18next";
+
 interface props {
   setSearch: (search: string) => void;
 }
 
 const Search = ({ setSearch }: props) => {
+  const { t } = useTranslation();
+
   const changeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
   };
@@ -20,7 +24,7 @@ const Search = ({ setSearch }: props) => {
           type="search"
           id="default-search"
           className="block w-full truncate rounded-lg border border-gray-300 bg-gray-50 p-4 pr-10 text-sm text-gray-900"
-          placeholder="Search by comment"
+          placeholder={t("searchPlaceholder")}
           required
         />
         <svg

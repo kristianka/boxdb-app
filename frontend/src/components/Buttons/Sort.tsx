@@ -1,6 +1,7 @@
 import { Dropdown } from "flowbite-react";
 import { ArrowLongDownIcon, ArrowLongUpIcon } from "@heroicons/react/16/solid";
 import { SortType } from "../../types";
+import { useTranslation } from "react-i18next";
 
 interface props {
   sort: SortType;
@@ -8,9 +9,11 @@ interface props {
 }
 
 const Sort = ({ sort, setSort }: props) => {
+  const { t } = useTranslation();
+
   return (
     <div className="m-1 inline-flex items-center rounded-lg border border-gray-300 bg-gray-50 px-5 py-2.5 text-center text-sm font-medium hover:bg-gray-300">
-      <Dropdown className="" label="Sort" inline>
+      <Dropdown className="" label={t("sort")} inline>
         <Dropdown.Item
           onClick={() => setSort("modifiedNewest")}
           icon={ArrowLongDownIcon}
