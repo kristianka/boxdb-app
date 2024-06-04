@@ -12,6 +12,7 @@ import { sortBoxes } from "./components/Buttons/sortLogic";
 import PaginationCount from "./components/Buttons/PaginationCount";
 import { getBoxes } from "./services/boxes";
 import ErrorMessage from "./components/ErrorMessage";
+import { toast } from "react-toastify";
 
 const address = import.meta.env.VITE_BACKEND_URL;
 
@@ -23,16 +24,21 @@ function App() {
   const [sort, setSort] = useState<SortType>("modifiedNewest");
 
   const [error, setError] = useState<boolean>(false);
-
   const [pagination, setPagination] = useState(10);
 
-  useEffect(() => {
-    const fetchBoxes = async () => {
-      if (!address) return;
+  const fetchBoxes = async () => {
+    try {
       const boxes = await getBoxes();
       console.log(boxes);
       setBoxes(boxes);
-    };
+    } catch (error) {
+      toast.error(
+        "Couldn't fetch boxes. Please check your .env and make sure the backend is running.",
+      );
+    }
+  };
+
+  useEffect(() => {
     if (!address) {
       setError(true);
     }
@@ -67,7 +73,7 @@ function App() {
               />
               <Sort sort={sort} setSort={setSort} />
               <NewBox />
-              <Refresh />
+              <Refresh fetchBoxes={fetchBoxes} />
             </div>
           </div>
           {error ? (
