@@ -8,28 +8,28 @@ dotenv.config();
 const prisma = new PrismaClient();
 
 const fastify = Fastify({
-    logger: true
+    logger: true,
 });
 
 fastify.register(cors, {
-    origin: process.env.FRONTEND_URL
+    origin: process.env.FRONTEND_URL,
 });
 
 const PORT = Number(process.env.PORT) || 3000;
 
-fastify.get("/", async function handler(request, reply) {
+fastify.get("/", async function handler(_request, _reply) {
     return {
-        message: "hello world"
+        message: "hello world",
     };
 });
 
-fastify.get("/boxes", async function handler(request, reply) {
+fastify.get("/boxes", async function handler(_request, reply) {
     try {
         const boxes = await prisma.boxes.findMany();
         reply.code(200).send(boxes);
     } catch (error) {
         reply.code(500).send({
-            error: "Internal Server Error. Read the server console for more information."
+            error: "Internal Server Error. Read the server console for more information.",
         });
         console.log("An error occurred while fetching boxes: \n", error);
     }
@@ -42,10 +42,10 @@ const boxSchema: FastifySchema = {
             width: { type: "number" },
             height: { type: "number" },
             depth: { type: "number" },
-            comment: { type: "string" }
+            comment: { type: "string" },
         },
-        required: ["width", "height", "depth"]
-    }
+        required: ["width", "height", "depth"],
+    },
 };
 
 fastify.post<{ Body: Box }>(
@@ -60,18 +60,18 @@ fastify.post<{ Body: Box }>(
                     width,
                     height,
                     depth,
-                    comment
-                }
+                    comment,
+                },
             });
 
             reply.code(201).send(box);
         } catch (error) {
             reply.code(500).send({
-                error: "Internal Server Error. Read the server console for more information."
+                error: "Internal Server Error. Read the server console for more information.",
             });
             console.log("An error occurred while creating a box: \n", error);
         }
-    }
+    },
 );
 
 const start = async () => {
