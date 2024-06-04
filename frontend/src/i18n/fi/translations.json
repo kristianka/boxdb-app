@@ -1,3 +1,32 @@
 {
-    "boxes": "Laatikot"
+    "headerTitle": "Laatikkotietokanta",
+    "sourceCode": "Lähdekoodi",
+    "boxes": "Laatikot",
+    "detailedInfo": "Tarkemmat tiedot",
+    "changeLanguage": "Vaihda kieli",
+    "search": "Haku",
+    "searchPlaceholder": "Hae laatikkoa kommentilla",
+    "show": "Näytä",
+    "sort": "Järjestä",
+    "addNewBoxTooltip": "Lisää uusi laatikko",
+    "refreshTooltip": "Päivitä",
+    "width": "Leveys",
+    "height": "Korkeus",
+    "depth": "Syvyys",
+    "weightHeightDepthAbbreviation": "L x K x S",
+    "createdAt": "Luotu",
+    "updatedAt": "Päivitetty",
+    "comments": "Kommentti",
+    "noBoxes": "Laatikoita ei löytynyt",
+    "detailedInfoTip": "Näytä tarkemmat tiedot",
+    "createBox": "Luo laatikko",
+    "enterWidth": "Syötä leveys",
+    "enterHeight": "Syötä korkeus",
+    "enterDepth": "Syötä syvyys",
+    "enterComment": "Syötä kommentti",
+    "commentTip": "Kommentti on vapaaehtoinen",
+    "add": "Lisää",
+    "createBoxIdTip": "Laatikon ID luodaan automaattisesti",
+    "couldntFetchBoxes": "Laatikoita ei voitu hakea. Varmista että olet yhteydessä internetiin ja yritä myöhemmin uudelleen."
+
 }

@@ -1,3 +1,33 @@
 {
-    "boxes": "Boxes"
+    "headerTitle": "Box dimensions database",
+    "sourceCode": "Source code",
+    "boxes": "Boxes",
+    "detailedInfo": "Detailed info",
+    "changeLanguage": "Change Language",
+    "search": "Search",
+    "searchPlaceholder": "Search by comment",
+    "show": "Show",
+    "sort": "Sort",
+    "addNewBoxTooltip": "Add a new box",
+    "refreshTooltip": "Refresh list",
+    "width": "Width",
+    "height": "Height",
+    "depth": "Depth",
+    "weightHeightDepthAbbreviation": "W x H x D",
+    "createdAt": "Created at",
+    "updatedAt": "Updated at",
+    "comments": "Comment",
+    "noBoxes": "No boxes found",
+    "detailedInfoTip": "Click on a box to see its information",
+    "createBox": "Create a new box",
+    "enterWidth": "Enter width",
+    "enterHeight": "Enter height",
+    "enterDepth": "Enter depth",
+    "enterComment": "Enter comment",
+    "commentTip": "Comment is optional",
+    "add": "Add",
+
+    "createBoxIdTip": "ID of the box is generated automatically",
+    "couldntFetchBoxes": "Couldn't fetch boxes. Please check your internet connection and try again."
+
 }
