@@ -13,6 +13,9 @@ import PaginationCount from "./components/Buttons/PaginationCount";
 import { getBoxes } from "./services/boxes";
 import ErrorMessage from "./components/ErrorMessage";
 import { toast } from "react-toastify";
+import "./i18n/config";
+import { useTranslation } from "react-i18next";
+import i18next from "i18next";
 
 const address = import.meta.env.VITE_BACKEND_URL;
 
@@ -24,6 +27,13 @@ function App() {
 
   const [error, setError] = useState<boolean>(false);
   const [pagination, setPagination] = useState(10);
+
+  const { t } = useTranslation();
+
+  const changeLang = () => {
+    const lang = i18next.language === "en" ? "fi" : "en";
+    i18next.changeLanguage(lang);
+  };
 
   const fetchBoxes = async () => {
     try {
@@ -60,10 +70,11 @@ function App() {
   return (
     <div className="flex min-h-screen flex-col bg-slate-50">
       <Header />
+      <button onClick={changeLang}>change lang</button>
       <div className="m-3 mt-5 grid sm:grid-cols-1 md:grid-cols-5">
         <div className="m-3 md:col-span-3">
           <div className="mb-3 flex flex-wrap items-center justify-between">
-            <h2 className="mb-5 text-xl">Entries</h2>
+            <h2 className="mb-5 text-xl">{t("boxes")}</h2>
             <div className="flex">
               <Search setSearch={setSearch} />
               <PaginationCount
