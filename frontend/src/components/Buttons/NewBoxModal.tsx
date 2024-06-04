@@ -2,6 +2,7 @@ import { Button, Label, Modal, TextInput, Textarea } from "flowbite-react";
 import { useState } from "react";
 import { isValid } from "../../misc";
 import ErrorMessage from "../ErrorMessage";
+import { useTranslation } from "react-i18next";
 
 interface props {
   openModal: boolean;
@@ -9,6 +10,7 @@ interface props {
 }
 
 const NewBoxModal = ({ openModal, setOpenModal }: props) => {
+  const { t } = useTranslation();
   // height, depth, and length are strings not nums so inputs work better
   const [width, setWidth] = useState("");
   const [height, setHeight] = useState("");
@@ -58,7 +60,7 @@ const NewBoxModal = ({ openModal, setOpenModal }: props) => {
         <Modal.Body>
           <div className="space-y-6">
             <h3 className="text-xl font-medium text-gray-900 dark:text-white">
-              Create a new box
+              {t("createBox")}
             </h3>
             {error && (
               <ErrorMessage
@@ -69,15 +71,15 @@ const NewBoxModal = ({ openModal, setOpenModal }: props) => {
             {/* width */}
             <div>
               <div className="mb-2 block">
-                <Label htmlFor="length" value="Width" />
+                <Label htmlFor="width" value={t("width")} />
               </div>
               <TextInput
-                placeholder="Enter width"
+                placeholder={t("enterWidth")}
                 min={0}
                 max={10000}
                 type="number"
-                id="with"
-                value={length}
+                id="width"
+                value={width}
                 onChange={(event) => setWidth(event.target.value)}
                 required
               />
@@ -85,10 +87,10 @@ const NewBoxModal = ({ openModal, setOpenModal }: props) => {
             {/* height */}
             <div>
               <div className="mb-2 block">
-                <Label htmlFor="height" value="Height" />
+                <Label htmlFor="height" value={t("height")} />
               </div>
               <TextInput
-                placeholder="Enter height"
+                placeholder={t("enterHeight")}
                 min={0}
                 max={10000}
                 type="number"
@@ -101,10 +103,10 @@ const NewBoxModal = ({ openModal, setOpenModal }: props) => {
             {/* depth */}
             <div>
               <div className="mb-2 block">
-                <Label htmlFor="depth" value="Depth" />
+                <Label htmlFor="depth" value={t("depth")} />
               </div>
               <TextInput
-                placeholder="Enter depth"
+                placeholder={t("enterDepth")}
                 min={0}
                 max={10000}
                 type="number"
@@ -117,20 +119,20 @@ const NewBoxModal = ({ openModal, setOpenModal }: props) => {
             {/* comment */}
             <div>
               <div className="mb-2 block">
-                <Label htmlFor="comment" value="Comment" />
+                <Label htmlFor="comment" value={t("comment")} />
               </div>
               <Textarea
                 rows={5}
                 id="comment"
                 value={comment}
-                placeholder="Comment is optional"
-                helperText="ID of the box is generated automatically."
+                placeholder={t("enterComment")}
+                helperText={t("createBoxIdTip") + "."}
                 onChange={(e) => setComment(e.target.value)}
               />
             </div>
             {/* submit */}
             <div className="w-full">
-              <Button onClick={addBox}>Add</Button>
+              <Button onClick={addBox}>{t("add")}</Button>
             </div>
           </div>
         </Modal.Body>
