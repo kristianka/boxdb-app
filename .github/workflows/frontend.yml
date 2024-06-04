@@ -29,16 +29,17 @@ jobs:
             - name: Run frontend lint
               run: cd frontend && npm run lint
 
-    test:
-        runs-on: ubuntu-22.04
-        steps:
-            - uses: actions/checkout@v3
-            - uses: actions/setup-node@v3
-              with:
-                  node-version: "20"
+    # temporarily disabled until upgraded to Playwright and fixed headless tests
+    # test:
+    #     runs-on: ubuntu-22.04
+    #     steps:
+    #         - uses: actions/checkout@v3
+    #         - uses: actions/setup-node@v3
+    #           with:
+    #               node-version: "20"
 
-            - name: Install dependencies for frontend
-              run: cd frontend && npm install
+    #         - name: Install dependencies for frontend
+    #           run: cd frontend && npm install
 
-            - name: Run frontend tests
-              run: cd frontend && npm run test
+    #         - name: Run frontend tests
+    #           run: cd frontend && npm run test
