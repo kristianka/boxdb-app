@@ -3,8 +3,8 @@ import "./i18n/config";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
-import i18next from "i18next";
 import PaginationCount from "./components/Buttons/PaginationCount";
+import axios from "axios";
 
 import { Box, SortType } from "./types";
 import Header from "./components/Header";
@@ -17,6 +17,7 @@ import NewBox from "./components/Buttons/NewBox";
 import { sortBoxes } from "./components/Buttons/sortLogic";
 import { getBoxes } from "./services/boxes";
 import ErrorMessage from "./components/ErrorMessage";
+import { searchBoxes } from "./misc";
 
 const address = import.meta.env.VITE_BACKEND_URL;
 
@@ -31,11 +32,6 @@ function App() {
 
   const { t } = useTranslation();
 
-  const changeLang = () => {
-    const lang = i18next.language === "en" ? "fi" : "en";
-    i18next.changeLanguage(lang);
-  };
-
   const fetchBoxes = async () => {
     try {
       const boxes = await getBoxes();
@@ -43,6 +39,7 @@ function App() {
       setBoxes(boxes);
     } catch (error) {
       toast.error(t("couldntFetchBoxes"));
+      if (axios.isAxiosError(error)) toast.info(error?.response?.data.error);
       setError(true);
     }
   };
@@ -58,19 +55,12 @@ function App() {
   // send empty array if boxes is undefined
   const sortedBoxes = sortBoxes(boxes ?? [], sort);
 
-  // Filter boxes based on search input
-  // updating the list as the user types. not case-sensitive
-  const filteredBoxes = sortedBoxes.filter((box) => {
-    return (
-      search === "" || box.comment?.toLowerCase().includes(search.toLowerCase())
-    );
-  });
+  // filter boxes based on search input
+  const filteredBoxes = searchBoxes(sortedBoxes, search);
 
-  console.log(boxes);
   return (
     <div className="flex min-h-screen flex-col bg-slate-50">
       <Header />
-      <button onClick={changeLang}>{t("changeLanguage")}</button>
       <div className="m-3 mt-5 grid sm:grid-cols-1 md:grid-cols-5">
         <div className="m-3 md:col-span-3">
           <div className="mb-3 flex flex-wrap items-center justify-between">

@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { changeLanguage } from "../misc";
 
 const Header = () => {
   const { t } = useTranslation();
@@ -8,6 +9,14 @@ const Header = () => {
       <div className="flex items-center justify-between">
         <h1 className="text-xl font-semibold md:flex">{t("headerTitle")}</h1>
         <ul className="flex items-center">
+          <li>
+            <button
+              className="mr-3 rounded-md bg-gray-100 p-3"
+              onClick={changeLanguage}
+            >
+              {t("changeLanguage")}
+            </button>
+          </li>
           <li>
             <a
               href="https://github.com/kristianka/boxdb-frontend"
