@@ -20,9 +20,9 @@ export const sortBoxes = (boxes: Box[], sort: SortType) => {
           new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
         );
       case "idAscending":
-        return a.id.localeCompare(b.id);
+        return a.id - b.id;
       case "idDescending":
-        return b.id.localeCompare(a.id);
+        return b.id - a.id;
       default:
         return 0;
     }
