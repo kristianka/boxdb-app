@@ -9,7 +9,8 @@ interface props {
 const ErrorMessage = ({ title, description }: props) => {
   return (
     <Alert color="failure" icon={HiInformationCircle}>
-      <span className="font-medium">{title}</span> {description}
+      <span className="font-medium">{title} </span>
+      {description}
     </Alert>
   );
 };

@@ -2,12 +2,14 @@ import { useEffect, useState } from "react";
 import { Box } from "../types";
 import { isValid } from "../misc";
 import ErrorMessage from "./ErrorMessage";
+import { useTranslation } from "react-i18next";
 
 interface props {
   box: Box;
 }
 
 const BoxDetails = ({ box }: props) => {
+  const { t } = useTranslation();
   const id = box.id;
 
   const [width, setWidth] = useState(0);
@@ -68,7 +70,7 @@ const BoxDetails = ({ box }: props) => {
             <button
               type="button"
               onClick={undoChanges}
-              title="Undo changes"
+              title={t("undoChanges")}
               className="m-1 inline-flex items-center rounded-lg border border-gray-300 bg-gray-50 px-5 py-2.5 text-center text-sm font-medium hover:bg-gray-300"
             >
               <svg
@@ -85,7 +87,7 @@ const BoxDetails = ({ box }: props) => {
             <button
               type="button"
               onClick={deleteBox}
-              title="Delete box"
+              title={t("deleteBox")}
               className="m-1 inline-flex items-center rounded-lg border border-gray-300 bg-gray-50 px-5 py-2.5 text-center text-sm font-medium hover:bg-red-500"
             >
               <svg
@@ -103,21 +105,25 @@ const BoxDetails = ({ box }: props) => {
         </div>
         {error && (
           <ErrorMessage
-            title="Error while modifying."
-            description="Make sure all values are numbers, greater than 0, and not empty."
+            title={t("editBoxErrorTitle")}
+            description={t("editBoxErrorDescription")}
           />
         )}
 
         <div className="mb-5 mt-3">
-          <p>Added at {new Date(box.createdAt).toLocaleString()}</p>
+          <p>
+            {t("createdAt")} {new Date(box.createdAt).toLocaleString()}
+          </p>
           {box.updatedAt !== box.createdAt && (
-            <p>Modified at {new Date(box.updatedAt).toLocaleString()}</p>
+            <p>
+              {t("updatedAt")} {new Date(box.updatedAt).toLocaleString()}
+            </p>
           )}
         </div>
         <form action="">
           {/* width */}
           <div className="mb-3">
-            <label htmlFor="width">Width: </label>
+            <label htmlFor="width">{t("width")}</label>
             <input
               className="mt-2 w-full rounded-md border-2 border-gray-300 bg-gray-50 p-2"
               name="width"
@@ -128,7 +134,7 @@ const BoxDetails = ({ box }: props) => {
           </div>
           {/* height */}
           <div className="mb-3">
-            <label htmlFor="height">Height:</label>
+            <label htmlFor="height">{t("height")}</label>
             <input
               className="mt-2 w-full rounded-md border-2 border-gray-300 bg-gray-50 p-2"
               name="height"
@@ -139,7 +145,7 @@ const BoxDetails = ({ box }: props) => {
           </div>
           {/* depth */}
           <div className="mb-3">
-            <label htmlFor="depth">Depth: </label>
+            <label htmlFor="depth">{t("depth")}</label>
             <input
               className="mt-2 w-full rounded-md border-2 border-gray-300 bg-gray-50 p-2"
               name="depth"
@@ -150,7 +156,7 @@ const BoxDetails = ({ box }: props) => {
           </div>
           {/* comment */}
           <div className="mb-3">
-            <label htmlFor="comment">Comment: </label>
+            <label htmlFor="comment">{t("comment")}: </label>
             <textarea
               className="mt-2 w-full rounded-md border-2 border-gray-300 bg-gray-50 p-2"
               name="comment"
@@ -162,7 +168,7 @@ const BoxDetails = ({ box }: props) => {
           {/* submit */}
           <button
             type="button"
-            title="Save changes"
+            title={t("saveChanges")}
             className="mb-5 inline-flex items-center rounded-lg border border-gray-300 bg-gray-50 px-5 py-2.5 text-center text-sm font-medium hover:bg-green-400"
             onClick={saveChanges}
           >
@@ -180,7 +186,7 @@ const BoxDetails = ({ box }: props) => {
                 d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5"
               />
             </svg>
-            Save changes
+            {t("saveChanges")}
           </button>
         </form>
       </div>
