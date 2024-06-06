@@ -106,7 +106,7 @@ const BoxDetails = ({ box }: props) => {
         {error && (
           <ErrorMessage
             title={t("editBoxErrorTitle")}
-            description={t("editBoxErrorDescription")}
+            description={t("BoxErrorDescription")}
           />
         )}
 

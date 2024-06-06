@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { Box } from "../types";
 
 interface props {
@@ -6,6 +7,8 @@ interface props {
 }
 
 const BoxListItem = ({ box, setSelectedBox }: props) => {
+  const { t } = useTranslation();
+
   const setSelected = () => {
     console.log("setSelected");
     setSelectedBox(box);
@@ -30,13 +33,13 @@ const BoxListItem = ({ box, setSelectedBox }: props) => {
               {new Date(box.updatedAt).toLocaleString()}
             </p>
           ) : (
-            <p className="truncate italic text-gray-600">Not modified</p>
+            <p className="truncate italic text-gray-600">{t("notModified")}</p>
           )}
         </div>
         {box.comment ? (
           <p className="truncate">{box.comment}</p>
         ) : (
-          <p className="truncate italic text-gray-600">No comment</p>
+          <p className="truncate italic text-gray-600">{t("noComment")}</p>
         )}
       </div>
     </button>

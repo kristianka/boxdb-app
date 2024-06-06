@@ -3,6 +3,7 @@ import { useState } from "react";
 import { isValid } from "../../misc";
 import ErrorMessage from "../ErrorMessage";
 import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
 
 interface props {
   openModal: boolean;
@@ -45,6 +46,7 @@ const NewBoxModal = ({ openModal, setOpenModal }: props) => {
 
     setError(false);
     setOpenModal(false);
+    toast.success(t("boxAdded"));
   };
 
   return (
@@ -64,8 +66,8 @@ const NewBoxModal = ({ openModal, setOpenModal }: props) => {
             </h3>
             {error && (
               <ErrorMessage
-                title="Error while adding."
-                description="Make sure all values are numbers, greater than 0, and not empty."
+                title={t("addBoxErrorTitle")}
+                description={t("BoxErrorDescription")}
               />
             )}
             {/* width */}

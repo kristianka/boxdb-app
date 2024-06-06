@@ -3,6 +3,7 @@ import { Pagination } from "flowbite-react";
 import BoxListHeaders from "./BoxListHeaders";
 import BoxListItem from "./BoxListItem";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 interface props {
   pagination: number;
@@ -11,6 +12,7 @@ interface props {
 }
 
 const BoxList = ({ pagination, filteredBoxes, setSelectedBox }: props) => {
+  const { t } = useTranslation();
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = pagination;
 
@@ -26,7 +28,7 @@ const BoxList = ({ pagination, filteredBoxes, setSelectedBox }: props) => {
       <BoxListHeaders />
       {filteredBoxes.length === 0 ? (
         <div className="mt-4 text-center text-gray-500">
-          No boxes found. Is the backend running?
+          {t("noBoxesFound")}
         </div>
       ) : (
         <>
@@ -39,6 +41,8 @@ const BoxList = ({ pagination, filteredBoxes, setSelectedBox }: props) => {
           ))}
           <div className="mt-4 flex overflow-x-auto sm:justify-center">
             <Pagination
+              previousLabel={t("previous")}
+              nextLabel={t("next")}
               data-testid="pagination"
               currentPage={currentPage}
               totalPages={Math.ceil(filteredBoxes.length / itemsPerPage)}
