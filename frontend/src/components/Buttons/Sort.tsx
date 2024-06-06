@@ -19,14 +19,14 @@ const Sort = ({ sort, setSort }: props) => {
           icon={ArrowLongDownIcon}
           className={sort === "modifiedNewest" ? "bg-gray-200" : ""}
         >
-          Modified, newest first
+          {t("modifiedNewest")}
         </Dropdown.Item>
         <Dropdown.Item
           onClick={() => setSort("modifiedOldest")}
           icon={ArrowLongUpIcon}
           className={sort === "modifiedOldest" ? "bg-gray-200" : ""}
         >
-          Modified, oldest first
+          {t("modifiedOldest")}
         </Dropdown.Item>
         <Dropdown.Divider />
         <Dropdown.Item
@@ -34,29 +34,29 @@ const Sort = ({ sort, setSort }: props) => {
           icon={ArrowLongDownIcon}
           className={sort === "addedNewest" ? "bg-gray-200" : ""}
         >
-          Added, newest first
+          {t("addedNewest")}
         </Dropdown.Item>
         <Dropdown.Item
           onClick={() => setSort("addedOldest")}
           icon={ArrowLongUpIcon}
           className={sort === "addedOldest" ? "bg-gray-200" : ""}
         >
-          Added, oldest first
+          {t("addedOldest")}
         </Dropdown.Item>
         <Dropdown.Divider />
-        <Dropdown.Item
-          onClick={() => setSort("idAscending")}
-          icon={ArrowLongUpIcon}
-          className={sort === "idAscending" ? "bg-gray-200" : ""}
-        >
-          ID, ascending
-        </Dropdown.Item>
         <Dropdown.Item
           onClick={() => setSort("idDescending")}
           icon={ArrowLongDownIcon}
           className={sort === "idDescending" ? "bg-gray-200" : ""}
         >
-          ID, descending
+          {t("idDescending")}
+        </Dropdown.Item>
+        <Dropdown.Item
+          onClick={() => setSort("idAscending")}
+          icon={ArrowLongUpIcon}
+          className={sort === "idAscending" ? "bg-gray-200" : ""}
+        >
+          {t("idAscending")}
         </Dropdown.Item>
       </Dropdown>
     </div>

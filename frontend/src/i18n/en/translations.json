@@ -7,7 +7,14 @@
     "search": "Search",
     "searchPlaceholder": "Search by comment",
     "show": "Show",
+    "perPage": "per page",
     "sort": "Sort",
+    "modifiedNewest": "Modified (newest first)",
+    "modifiedOldest": "Modified (oldest first)",
+    "addedNewest": "Added (newest first)",
+    "addedOldest": "Added (oldest first)",
+    "idAscending": "ID (ascending)",
+    "idDescending": "ID (descending)",
     "addNewBoxTooltip": "Add a new box",
     "refreshTooltip": "Refresh list",
     "width": "Width",
@@ -28,5 +35,7 @@
 
     "createBoxIdTip": "ID of the box is generated automatically",
     "couldntFetchBoxes": "Couldn't fetch boxes. Please check your internet connection and try again."
+
+
 
 }
