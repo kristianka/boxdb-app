@@ -5,13 +5,17 @@ import ErrorMessage from "../ErrorMessage";
 import { useTranslation } from "react-i18next";
 
 import { isValid } from "../../misc";
+import { addBox } from "../../services/boxes";
+import { Box } from "../../types";
 
 interface props {
   openModal: boolean;
   setOpenModal: (value: boolean) => void;
+  boxes: Box[];
+  setBoxes: (value: Box[]) => void;
 }
 
-const NewBoxModal = ({ openModal, setOpenModal }: props) => {
+const NewBoxModal = ({ openModal, setOpenModal, boxes, setBoxes }: props) => {
   const { t } = useTranslation();
   // height, depth, and length are strings not nums so inputs work better
   const [width, setWidth] = useState("");
@@ -25,30 +29,41 @@ const NewBoxModal = ({ openModal, setOpenModal }: props) => {
     setOpenModal(false);
   }
 
-  const addBox = () => {
-    const widthNum = Number(width);
-    const heightNum = Number(height);
-    const depthNum = Number(depth);
+  const handleSubmit = async () => {
+    try {
+      const widthNum = Number(width);
+      const heightNum = Number(height);
+      const depthNum = Number(depth);
 
-    console.log("add box");
-    if (!isValid(widthNum, heightNum, depthNum)) {
-      console.log("not valid");
-      setError(true);
-      return;
+      if (!isValid(widthNum, heightNum, depthNum)) {
+        setError(true);
+        return;
+      }
+
+      const newBox = {
+        width: widthNum,
+        height: heightNum,
+        depth: depthNum,
+        comment,
+      };
+
+      // db call to add box
+      const res = await addBox(newBox);
+      const newBoxes = [...boxes, res];
+      setBoxes(newBoxes);
+
+      // reset values
+      setWidth("");
+      setHeight("");
+      setDepth("");
+      setComment("");
+
+      setError(false);
+      setOpenModal(false);
+      toast.success(t("boxAdded"));
+    } catch (error) {
+      toast.error(t("addBoxErrorServer"));
     }
-
-    console.log("add box");
-    // db call to add box
-
-    // reset values
-    setWidth("");
-    setHeight("");
-    setDepth("");
-    setComment("");
-
-    setError(false);
-    setOpenModal(false);
-    toast.success(t("boxAdded"));
   };
 
   return (
@@ -136,7 +151,7 @@ const NewBoxModal = ({ openModal, setOpenModal }: props) => {
             </div>
             {/* submit */}
             <div className="w-full">
-              <Button onClick={addBox}>{t("add")}</Button>
+              <Button onClick={handleSubmit}>{t("add")}</Button>
             </div>
           </div>
         </Modal.Body>

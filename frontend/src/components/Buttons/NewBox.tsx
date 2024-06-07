@@ -1,8 +1,14 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import NewBoxModal from "./NewBoxModal";
+import { Box } from "../../types";
 
-const NewBox = () => {
+interface props {
+  boxes: Box[];
+  setBoxes: (value: Box[]) => void;
+}
+
+const NewBox = ({ boxes, setBoxes }: props) => {
   const { t } = useTranslation();
 
   const [openModal, setOpenModal] = useState(false);
@@ -30,7 +36,12 @@ const NewBox = () => {
           />
         </svg>
       </button>
-      <NewBoxModal openModal={openModal} setOpenModal={setOpenModal} />
+      <NewBoxModal
+        boxes={boxes}
+        setBoxes={setBoxes}
+        openModal={openModal}
+        setOpenModal={setOpenModal}
+      />
     </>
   );
 };

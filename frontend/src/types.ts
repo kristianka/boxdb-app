@@ -8,6 +8,13 @@ export interface Box {
   updatedAt: string;
 }
 
+export interface BoxInput {
+  width: number;
+  height: number;
+  depth: number;
+  comment?: string;
+}
+
 export type SortType =
   | "modifiedNewest"
   | "modifiedOldest"

@@ -25,7 +25,7 @@ import InfoMessage from "./components/InfoMessage";
 const address = import.meta.env.VITE_BACKEND_URL;
 
 function App() {
-  const [boxes, setBoxes] = useState<Box[]>();
+  const [boxes, setBoxes] = useState<Box[]>([]);
   const [selectedBox, setSelectedBox] = useState<Box>();
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState<SortType>("modifiedNewest");
@@ -75,7 +75,7 @@ function App() {
                 setPagination={setPagination}
               />
               <Sort sort={sort} setSort={setSort} />
-              <NewBox />
+              <NewBox boxes={boxes} setBoxes={setBoxes} />
               <Refresh fetchBoxes={fetchBoxes} />
             </div>
           </div>
