@@ -6,13 +6,13 @@ interface props {
   description: string;
 }
 
-const ErrorMessage = ({ title, description }: props) => {
+const InfoMessage = ({ title, description }: props) => {
   return (
-    <Alert color="failure" icon={HiInformationCircle}>
+    <Alert color="info" icon={HiInformationCircle}>
       <span className="font-medium">{title}. </span>
       {description}.
     </Alert>
   );
 };
 
-export default ErrorMessage;
+export default InfoMessage;

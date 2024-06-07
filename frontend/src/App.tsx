@@ -20,6 +20,7 @@ import { sortBoxes } from "./components/Buttons/sortLogic";
 import { getBoxes } from "./services/boxes";
 import ErrorMessage from "./components/ErrorMessage";
 import { searchBoxes } from "./misc";
+import InfoMessage from "./components/InfoMessage";
 
 const address = import.meta.env.VITE_BACKEND_URL;
 
@@ -79,10 +80,15 @@ function App() {
             </div>
           </div>
           {error ? (
-            <ErrorMessage
-              title="Error!"
-              description="Backend URL not found. Please check your .env file."
-            />
+            <div>
+              <ErrorMessage
+                title={t("error")}
+                description={t("couldntFetchBoxes")}
+              />
+              <div className="mt-3">
+                <InfoMessage title={t("info")} description={t("infoTip")} />
+              </div>
+            </div>
           ) : (
             <BoxList
               pagination={pagination}

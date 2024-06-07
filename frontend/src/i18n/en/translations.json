@@ -39,9 +39,9 @@
     "undoChanges": "Undo changes",
     "deleteBox": "Delete box",
     "saveChanges": "Save changes",
-    "editBoxErrorTitle": "Error while modifying.",
-    "addBoxErrorTitle": "Error while adding.",
-    "BoxErrorDescription": " Make sure all values are numbers, greater than 0, and not empty.",
+    "editBoxErrorTitle": "Error while modifying",
+    "addBoxErrorTitle": "Error while adding",
+    "BoxErrorDescription": " Make sure all values are numbers, greater than 0, and not empty",
     "notModified": "Not modified",
     "noComment": "No comment",
     "previous": "Previous",
@@ -49,7 +49,10 @@
     "noBoxesFound": "No boxes found.",
     "boxAdded": "Box added successfully.",
     "boxDeleted": "Box deleted successfully.",
-    "language": "Language"
-
+    "language": "Language",
+    "error": "Error",
+    "tip": "Tip",
+    "info": "Info",
+    "infoTip": "Make sure backend and database are running, and you have set the .env values to backend and frontend. See GitHub readme for more information"
 
 }
