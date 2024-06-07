@@ -15,6 +15,19 @@ fastify.register(cors, {
     origin: process.env.FRONTEND_URL,
 });
 
+const boxSchema: FastifySchema = {
+    body: {
+        type: "object",
+        properties: {
+            width: { type: "number" },
+            height: { type: "number" },
+            depth: { type: "number" },
+            comment: { type: "string" },
+        },
+        required: ["width", "height", "depth"],
+    },
+};
+
 const PORT = Number(process.env.PORT) || 3000;
 
 fastify.get("/", async function handler(_request, _reply) {
@@ -35,25 +48,21 @@ fastify.get("/boxes", async function handler(_request, reply) {
     }
 });
 
-const boxSchema: FastifySchema = {
-    body: {
-        type: "object",
-        properties: {
-            width: { type: "number" },
-            height: { type: "number" },
-            depth: { type: "number" },
-            comment: { type: "string" },
-        },
-        required: ["width", "height", "depth"],
-    },
-};
-
 fastify.post<{ Body: Box }>(
     "/boxes",
     { schema: boxSchema },
     async function handler(request, reply) {
         try {
+            // Fastify schema validation ensures that width, height, and depth are not missing
+            // string is converted automatically to number if possible
             const { width, height, depth, comment } = request.body;
+
+            if (width <= 0 || height <= 0 || depth <= 0) {
+                reply.code(400).send({
+                    error: "Width, height, and depth must be greater than 0.",
+                });
+                return;
+            }
 
             const box = await prisma.boxes.create({
                 data: {
