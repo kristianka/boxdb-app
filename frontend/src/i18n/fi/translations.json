@@ -47,6 +47,7 @@
     "next": "Seuraava",
     "noBoxesFound": "Laatikoita ei löytynyt.",
     "boxAdded": "Laatikko lisätty onnistuneesti.",
-    "boxDeleted": "Laatikko poistettu onnistuneesti."
+    "boxDeleted": "Laatikko poistettu onnistuneesti.",
+    "language": "Kieli"
 
 }

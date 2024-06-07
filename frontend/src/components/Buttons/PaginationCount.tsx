@@ -15,25 +15,33 @@ const PaginationCount = ({ pagination, setPagination }: props) => {
       <Dropdown className="" label={t("show")} inline>
         <Dropdown.Item
           onClick={() => setPagination(10)}
-          className={pagination === 10 ? "bg-gray-200" : ""}
+          className={
+            pagination === 10 ? "rounded-md bg-gray-200" : "rounded-md"
+          }
         >
           10 {t("perPage")}
         </Dropdown.Item>
         <Dropdown.Item
           onClick={() => setPagination(25)}
-          className={pagination === 25 ? "bg-gray-200" : ""}
+          className={
+            pagination === 25 ? "rounded-md bg-gray-200" : "rounded-md"
+          }
         >
           25 {t("perPage")}
         </Dropdown.Item>
         <Dropdown.Item
           onClick={() => setPagination(50)}
-          className={pagination === 50 ? "bg-gray-200" : ""}
+          className={
+            pagination === 50 ? "rounded-md bg-gray-200" : "rounded-md"
+          }
         >
           50 {t("perPage")}
         </Dropdown.Item>
         <Dropdown.Item
           onClick={() => setPagination(100)}
-          className={pagination === 100 ? "bg-gray-200" : ""}
+          className={
+            pagination === 100 ? "rounded-md bg-gray-200" : "rounded-md"
+          }
         >
           100 {t("perPage")}
         </Dropdown.Item>

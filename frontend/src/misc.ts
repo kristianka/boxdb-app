@@ -16,10 +16,10 @@ export const isValid = (
   return false;
 };
 
-// toggle between languages
-export const changeLanguage = () => {
-  const lang = i18next.language === "en" ? "fi" : "en";
-  i18next.changeLanguage(lang);
+export const changeLanguage = (language: string) => {
+  const newLanguage = language;
+  i18next.changeLanguage(newLanguage);
+  localStorage.setItem("i18nextLng", newLanguage);
 };
 
 // Filter boxes based on search input

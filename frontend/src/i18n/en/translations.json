@@ -48,7 +48,8 @@
     "next": "Next",
     "noBoxesFound": "No boxes found.",
     "boxAdded": "Box added successfully.",
-    "boxDeleted": "Box deleted successfully."
+    "boxDeleted": "Box deleted successfully.",
+    "language": "Language"
 
 
 }

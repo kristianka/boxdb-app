@@ -1,9 +1,10 @@
 import { Button, Label, Modal, TextInput, Textarea } from "flowbite-react";
 import { useState } from "react";
-import { isValid } from "../../misc";
+import { toast } from "react-toastify";
 import ErrorMessage from "../ErrorMessage";
 import { useTranslation } from "react-i18next";
-import { toast } from "react-toastify";
+
+import { isValid } from "../../misc";
 
 interface props {
   openModal: boolean;
@@ -38,6 +39,7 @@ const NewBoxModal = ({ openModal, setOpenModal }: props) => {
 
     console.log("add box");
     // db call to add box
+
     // reset values
     setWidth("");
     setHeight("");
