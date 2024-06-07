@@ -19,3 +19,9 @@ export const updateBox = async (box: Box) => {
   const updatedBox = res.data;
   return updatedBox;
 };
+
+export const deleteBox = async (id: number) => {
+  const res = await axios.delete<Box>(`${address}/boxes/${id}`);
+  const deletedBox = res.data;
+  return deletedBox;
+};

@@ -3,6 +3,7 @@ import { Box } from "../types";
 import { isValid } from "../misc";
 import ErrorMessage from "./ErrorMessage";
 import { useTranslation } from "react-i18next";
+import { deleteBox } from "../services/boxes";
 
 interface props {
   box: Box;
@@ -22,23 +23,14 @@ const BoxDetails = ({ box }: props) => {
 
   const undoChanges = () => {
     // Toggle reset state to trigger useEffect
-    if (
-      window.confirm(
-        "Are you sure you want to undo all changes? This will reset all values to the original state and changes will be lost.",
-      )
-    ) {
+    if (window.confirm(t("undoWarning"))) {
       setReset(!reset);
     }
   };
 
-  const deleteBox = () => {
-    if (
-      window.confirm(
-        "Are you sure you want to delete this box? This action cannot be undone!",
-      )
-    ) {
-      console.log("delete box");
-      // db call to delete box
+  const handleDelete = async () => {
+    if (window.confirm(t("deleteWarning"))) {
+      await deleteBox(box.id);
     }
   };
 
@@ -86,7 +78,7 @@ const BoxDetails = ({ box }: props) => {
             </button>
             <button
               type="button"
-              onClick={deleteBox}
+              onClick={handleDelete}
               title={t("deleteBox")}
               className="m-1 inline-flex items-center rounded-lg border border-gray-300 bg-gray-50 px-5 py-2.5 text-center text-sm font-medium hover:bg-red-500"
             >
@@ -128,7 +120,7 @@ const BoxDetails = ({ box }: props) => {
               className="mt-2 w-full rounded-md border-2 border-gray-300 bg-gray-50 p-2"
               name="width"
               type="number"
-              value={length}
+              value={width}
               onChange={(e) => setWidth(parseInt(e.target.value))}
             />
           </div>
