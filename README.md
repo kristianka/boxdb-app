@@ -7,14 +7,18 @@ This is still very work in progress, and many things will change like backend st
 
 
 ## Info
-- Frontend made with React, Vite, TailwindCSS!
+- Frontend made with TypeScript, React, Vite, TailwindCSS!
+- Backend made with TypeScript, Fastify, Prisma!
 - Uses Microsoft SQL Server 2019 Express so Siemens 1200 PLC can connect to it.
 - Project uses prettier and eslint for code guidelines.
-- Backend will be made with Fastify, Prisma!
 - Headless testing done with Vitest and E2E tests will be done with Playwright!
 - Will be Dockerized
 
 ### Frontend features
+- Get boxes from backend
+- Create a new box, upload to backend
+- Update a box, upload to backend
+- Delete box from backend
 - Proper form validation with feedback (will also be in backend of course)
 - The application is fully responsive to all screen types.
   - Note how the table removes some rows when the screen gets smaller, buttons don't overflow but go to a new line, text doesn't overflow, box information goes below the table and not side-by-side, and other small changes happen.
@@ -25,7 +29,15 @@ This is still very work in progress, and many things will change like backend st
 - Search
 - Sorting
   - Sort by last modified, when created (asc or desc) or by id (asc or desc)
+- Language selection
+  - Languages are Finnish and English
 
+### Backend features
+- Get boxes
+- Upload boxes
+- Update boxes
+- Delete boxes
+- Validation for every route
 
 ## Instructions
 
