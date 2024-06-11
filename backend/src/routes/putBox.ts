@@ -3,17 +3,12 @@ import { FastifyInstance } from "fastify";
 
 import { updateBoxSchema } from "../schemas/boxSchemas";
 import { validateDimensions } from "../misc";
-import { Box } from "../types";
+import { Box, RouteParams } from "../types";
 
 export async function registerPutBoxRoute(
     fastify: FastifyInstance,
     prisma: PrismaClient,
 ) {
-    // Step 1: Define an interface for the route parameters
-    interface RouteParams {
-        id: string; // Assuming id is passed as a string
-    }
-
     fastify.put<{ Params: RouteParams; Body: Partial<Box> }>(
         "/boxes/:id",
         { schema: updateBoxSchema },
@@ -45,10 +40,10 @@ export async function registerPutBoxRoute(
                     },
                 });
 
-                return reply.code(201).send(updatedBox);
+                return reply.code(200).send(updatedBox);
             } catch (error) {
                 console.log(
-                    "An error occurred while creating a box: \n",
+                    "An error occurred while updating a box: \n",
                     error,
                 );
                 // prisma errors

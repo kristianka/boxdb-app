@@ -31,3 +31,13 @@ export const updateBoxSchema: FastifySchema = {
         },
     },
 };
+
+export const deleteBoxSchema: FastifySchema = {
+    params: {
+        type: "object",
+        properties: {
+            id: { type: "string" },
+        },
+        required: ["id"],
+    },
+};

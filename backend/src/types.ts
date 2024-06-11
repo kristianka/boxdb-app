@@ -7,3 +7,7 @@ export interface Box {
     createdAt: string;
     updatedAt: string;
 }
+
+export interface RouteParams {
+    id: string;
+}
