@@ -8,6 +8,7 @@ export async function registerGetBoxesRoute(
     fastify.get("/boxes", async function handler(_request, reply) {
         try {
             const boxes = await prisma.boxes.findMany();
+            console.log("Boxes fetched");
             reply.code(200).send(boxes);
         } catch (error) {
             reply.code(500).send({

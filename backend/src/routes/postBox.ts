@@ -32,6 +32,7 @@ export async function registerPostBoxesRoute(
                     },
                 });
 
+                console.log("Box created:", box);
                 reply.code(201).send(box);
             } catch (error) {
                 reply.code(500).send({

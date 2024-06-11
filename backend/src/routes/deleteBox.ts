@@ -8,7 +8,7 @@ export async function registerDeleteBoxRoute(
     prisma: PrismaClient,
 ) {
     fastify.delete<{ Params: RouteParams }>(
-        "/box/:id",
+        "/boxes/:id",
         { schema: deleteBoxSchema },
         async function handler(request, reply) {
             try {
@@ -18,6 +18,7 @@ export async function registerDeleteBoxRoute(
                     where: { id: numericId },
                 });
 
+                console.log("Box deleted:", box);
                 reply.code(200).send({ message: "Box deleted successfully." });
             } catch (error) {
                 console.log(

@@ -40,6 +40,7 @@ export async function registerPutBoxRoute(
                     },
                 });
 
+                console.log("Box updated:", updatedBox);
                 return reply.code(200).send(updatedBox);
             } catch (error) {
                 console.log(
