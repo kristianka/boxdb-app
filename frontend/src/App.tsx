@@ -38,7 +38,6 @@ function App() {
   const fetchBoxes = async () => {
     try {
       const boxes = await getBoxes();
-      console.log(boxes);
       setBoxes(boxes);
     } catch (error) {
       toast.error(t("couldntFetchBoxes"));

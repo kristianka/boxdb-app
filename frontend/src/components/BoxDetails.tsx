@@ -34,8 +34,7 @@ const BoxDetails = ({ boxes, setBoxes, box }: props) => {
   const handleDelete = async () => {
     if (window.confirm(t("deleteWarning"))) {
       try {
-        const res = await deleteBox(box.id);
-        console.log("delete", res);
+        await deleteBox(box.id);
         // filter removed box from boxes
         const newBoxes = boxes.filter((b) => b.id !== box.id);
         setBoxes(newBoxes);
@@ -50,7 +49,6 @@ const BoxDetails = ({ boxes, setBoxes, box }: props) => {
   const handleUpdate = async () => {
     try {
       if (!isValid(width, height, depth)) {
-        console.log("not valid");
         setError(true);
         return;
       }
