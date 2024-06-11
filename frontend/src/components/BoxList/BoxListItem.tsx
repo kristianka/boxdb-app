@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { Box } from "../types";
+import { Box } from "../../types";
 
 interface props {
   box: Box;

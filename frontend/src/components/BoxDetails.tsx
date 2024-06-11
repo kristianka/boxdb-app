@@ -3,7 +3,7 @@ import { Box } from "../types";
 import { isValid } from "../misc";
 import ErrorMessage from "./ErrorMessage";
 import { useTranslation } from "react-i18next";
-import { deleteBox } from "../services/boxes";
+import { deleteBox, updateBox } from "../services/boxes";
 import { toast } from "react-toastify";
 
 interface props {
@@ -41,8 +41,31 @@ const BoxDetails = ({ boxes, setBoxes, box }: props) => {
         setBoxes(newBoxes);
         toast.success(t("boxDeleted"));
       } catch (error) {
+        console.log(error);
         toast.error(t("boxDeleteError"));
       }
+    }
+  };
+
+  const handleUpdate = async () => {
+    try {
+      if (!isValid(width, height, depth)) {
+        console.log("not valid");
+        setError(true);
+        return;
+      }
+
+      // create a new box, overwrite old values
+      const newBox = { ...box, width, height, depth, comment };
+      const res = await updateBox(newBox);
+      // update boxes state
+      const newBoxes = boxes.map((b) => (b.id === box.id ? res : b));
+      setBoxes(newBoxes);
+      setError(false);
+      toast.success(t("boxUpdated"));
+    } catch (error) {
+      console.log(error);
+      toast.error(t("boxUpdateError"));
     }
   };
 
@@ -53,20 +76,6 @@ const BoxDetails = ({ boxes, setBoxes, box }: props) => {
     setDepth(box.depth);
     setComment(box.comment || "");
   }, [box, reset]);
-
-  const saveChanges = () => {
-    if (!isValid(width, height, depth)) {
-      console.log("not valid");
-      setError(true);
-      return;
-    }
-    try {
-      // db call to update box
-      setError(false);
-    } catch (error) {
-      console.log("save changes");
-    }
-  };
 
   return (
     <div className="rounded-md bg-white">
@@ -177,7 +186,7 @@ const BoxDetails = ({ boxes, setBoxes, box }: props) => {
             type="button"
             title={t("saveChanges")}
             className="mb-5 inline-flex items-center rounded-lg border border-gray-300 bg-gray-50 px-5 py-2.5 text-center text-sm font-medium hover:bg-green-400"
-            onClick={saveChanges}
+            onClick={handleUpdate}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

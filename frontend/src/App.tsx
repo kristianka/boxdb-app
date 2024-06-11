@@ -12,7 +12,7 @@ import { Box, SortType } from "./types";
 import Header from "./components/Header";
 import Search from "./components/Search";
 import BoxDetails from "./components/BoxDetails";
-import BoxList from "./components/BoxList";
+import BoxList from "./components/BoxList/BoxList";
 import Sort from "./components/Buttons/Sort";
 import Refresh from "./components/Buttons/Refresh";
 import NewBox from "./components/Buttons/NewBox";

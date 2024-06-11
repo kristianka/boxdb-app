@@ -1,4 +1,4 @@
-import { Box } from "../types";
+import { Box } from "../../types";
 import { Pagination } from "flowbite-react";
 import BoxListHeaders from "./BoxListHeaders";
 import BoxListItem from "./BoxListItem";
