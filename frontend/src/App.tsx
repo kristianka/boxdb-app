@@ -92,8 +92,9 @@ function App() {
           ) : (
             <BoxList
               pagination={pagination}
-              setSelectedBox={setSelectedBox}
               filteredBoxes={filteredBoxes}
+              selectedBox={selectedBox}
+              setSelectedBox={setSelectedBox}
             />
           )}
         </div>

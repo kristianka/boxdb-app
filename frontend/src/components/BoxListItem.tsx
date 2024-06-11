@@ -3,22 +3,26 @@ import { Box } from "../types";
 
 interface props {
   box: Box;
+  selectedBox: Box | undefined;
   setSelectedBox: (box: Box) => void;
 }
 
-const BoxListItem = ({ box, setSelectedBox }: props) => {
+const BoxListItem = ({ box, selectedBox, setSelectedBox }: props) => {
   const { t } = useTranslation();
 
   const setSelected = () => {
-    console.log("setSelected");
     setSelectedBox(box);
   };
+
+  const isSelected = selectedBox?.id === box.id;
 
   return (
     <button
       data-testid="BoxListItem"
       onClick={setSelected}
-      className="mb-2 w-full rounded-md bg-white p-2 text-left hover:bg-gray-100"
+      className={`mb-2 w-full rounded-md p-2 text-left ${
+        isSelected ? "bg-gray-200" : "bg-white hover:bg-gray-100"
+      }`}
       title={box.comment ? box.comment : "No comment"}
     >
       <div className="grid grid-cols-4 md:grid-cols-5">

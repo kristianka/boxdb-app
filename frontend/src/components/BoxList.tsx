@@ -8,10 +8,16 @@ import { useTranslation } from "react-i18next";
 interface props {
   pagination: number;
   filteredBoxes: Box[];
+  selectedBox: Box | undefined;
   setSelectedBox: (box: Box) => void;
 }
 
-const BoxList = ({ pagination, filteredBoxes, setSelectedBox }: props) => {
+const BoxList = ({
+  pagination,
+  filteredBoxes,
+  selectedBox,
+  setSelectedBox,
+}: props) => {
   const { t } = useTranslation();
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = pagination;
@@ -36,6 +42,7 @@ const BoxList = ({ pagination, filteredBoxes, setSelectedBox }: props) => {
             <BoxListItem
               key={box.id}
               box={box}
+              selectedBox={selectedBox}
               setSelectedBox={setSelectedBox}
             />
           ))}
