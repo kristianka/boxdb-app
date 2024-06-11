@@ -55,6 +55,7 @@
     "info": "Info",
     "infoTip": "Varmista että backend ja tietokanta ovat käynnissä, ja että olet asettanut .env arvot backendiin ja frontendiin. Katso GitHubin readme lisätietoja varten",
     "undoWarning": "Oletko varma että haluat perua muutokset? Kaikki muutokset menetetään!",
-    "deleteWarning": "Oletko varma että haluat poistaa tämän laatikon? Tätä toimintoa ei voi perua!"
+    "deleteWarning": "Oletko varma että haluat poistaa tämän laatikon? Tätä toimintoa ei voi perua!",
+    "boxDeleteError": "Virhe laatikkoa poistaessa"
 
 }

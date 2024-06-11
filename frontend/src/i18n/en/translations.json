@@ -56,6 +56,7 @@
     "info": "Info",
     "infoTip": "Make sure backend and database are running, and you have set the .env values to backend and frontend. See GitHub readme for more information",
     "undoWarning": "Are you sure you want to undo changes? All changes will be lost!",
-    "deleteWarning": "Are you sure you want to delete this box? This action cannot be undone!"
+    "deleteWarning": "Are you sure you want to delete this box? This action cannot be undone!",
+    "boxDeleteError": "Error while deleting box"
 
 }

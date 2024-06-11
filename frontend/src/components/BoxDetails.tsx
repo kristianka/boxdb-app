@@ -4,12 +4,15 @@ import { isValid } from "../misc";
 import ErrorMessage from "./ErrorMessage";
 import { useTranslation } from "react-i18next";
 import { deleteBox } from "../services/boxes";
+import { toast } from "react-toastify";
 
 interface props {
+  boxes: Box[];
+  setBoxes: (boxes: Box[]) => void;
   box: Box;
 }
 
-const BoxDetails = ({ box }: props) => {
+const BoxDetails = ({ boxes, setBoxes, box }: props) => {
   const { t } = useTranslation();
   const id = box.id;
 
@@ -30,7 +33,16 @@ const BoxDetails = ({ box }: props) => {
 
   const handleDelete = async () => {
     if (window.confirm(t("deleteWarning"))) {
-      await deleteBox(box.id);
+      try {
+        const res = await deleteBox(box.id);
+        console.log("delete", res);
+        // filter removed box from boxes
+        const newBoxes = boxes.filter((b) => b.id !== box.id);
+        setBoxes(newBoxes);
+        toast.success(t("boxDeleted"));
+      } catch (error) {
+        toast.error(t("boxDeleteError"));
+      }
     }
   };
 
@@ -48,9 +60,12 @@ const BoxDetails = ({ box }: props) => {
       setError(true);
       return;
     }
-    console.log("save changes");
-    // db call to update box
-    setError(false);
+    try {
+      // db call to update box
+      setError(false);
+    } catch (error) {
+      console.log("save changes");
+    }
   };
 
   return (

@@ -104,7 +104,7 @@ function App() {
               {t("detailedInfoTip")}
             </p>
           ) : (
-            <BoxDetails box={selectedBox} />
+            <BoxDetails boxes={boxes} setBoxes={setBoxes} box={selectedBox} />
           )}
         </div>
       </div>
