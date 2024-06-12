@@ -1,0 +1,31 @@
+services:
+
+  frontend:
+    container_name: frontend
+    build:
+      context: ./frontend
+      dockerfile: ./Dockerfile
+    env_file:
+        - ./frontend/.docker.env
+
+  backend:
+    container_name: backend
+    build:
+      context: ./backend
+      dockerfile: ./Dockerfile
+    env_file:
+      - ./backend/.docker.env
+
+  nginx:
+    container_name: ngix
+    image: nginx:1.26.0-alpine
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - frontend
+      - backend
+
+# relies on on the Dockerfiles from the directories
+# no volumes because it doesn't save any data
