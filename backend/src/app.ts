@@ -32,7 +32,7 @@ const start = async () => {
             throw new Error("DATABASE_URL is not set");
         }
         await boxRoutes(fastify, prisma);
-        await fastify.listen({ port: PORT });
+        await fastify.listen({ port: PORT, host: "0.0.0.0" });
         console.log(`Server listening on ${PORT}`);
     } catch (err) {
         console.log("Error starting the server: \n", err);
