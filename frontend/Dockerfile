@@ -5,6 +5,9 @@ WORKDIR /usr/src/app
 
 COPY . .
 
+# Overwrite any .env file with the contents of .docker.env
+COPY .docker.env .env
+
 RUN npm install && \
     npm run build
 
