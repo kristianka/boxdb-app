@@ -12,6 +12,8 @@ COPY .docker.env .env
 # regenate database schema
 RUN npm install && \
     npx prisma generate && \
+    npx prisma migrate dev --name init && \
+    npx prisma migrate deploy && \
     npm run build
 
 
