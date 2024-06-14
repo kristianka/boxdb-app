@@ -1,5 +1,16 @@
 services:
 
+  database:
+    container_name: database
+    image: mcr.microsoft.com/azure-sql-edge:latest
+    ports:
+      - 1433:1433
+    env_file:
+      - ./backend/.docker.env
+    volumes:
+    - box-db:/var/opt/mssql
+
+
   frontend:
     container_name: frontend
     build:
@@ -8,6 +19,7 @@ services:
     env_file:
         - ./frontend/.docker.env
 
+
   backend:
     container_name: backend
     build:
@@ -15,6 +27,8 @@ services:
       dockerfile: ./Dockerfile
     env_file:
       - ./backend/.docker.env
+    depends_on:
+      - database
 
   nginx:
     container_name: ngix
@@ -27,5 +41,5 @@ services:
       - frontend
       - backend
 
-# relies on on the Dockerfiles from the directories
-# no volumes because it doesn't save any data
+volumes:
+  box-db:
