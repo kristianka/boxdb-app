@@ -3,7 +3,7 @@
 Full Stack application that let's you store box dimensions. Database hosted with Microsoft SQL inside Docker, which is run on a Raspberry Pi 4. [See here for images!](#images)
 
 > [!NOTE]
-This is still very work in progress, and many things will change like backend structure and adding proper tests. This project will be finished by mid-June and the readme will be updating again then with more instructions and information.
+This is still work in progress, and many things will change like adding proper tests. This project will be finished by mid-June and the readme will be updating again then with more instructions and information.
 
 
 ## Info
@@ -12,7 +12,7 @@ This is still very work in progress, and many things will change like backend st
 - Uses Microsoft SQL Server 2019 Express so Siemens 1200 PLC can connect to it.
 - Project uses prettier and eslint for code guidelines.
 - Headless testing done with Vitest and E2E tests will be done with Playwright!
-- Will be Dockerized
+- Fully dockerized, needs only two `.env` files for setup!
 
 ### Frontend features
 - Get boxes from backend
@@ -41,19 +41,25 @@ This is still very work in progress, and many things will change like backend st
 
 ## Instructions
 
-### Running the frontend
+### Production
+
+TBD
+
+### Development
+
+#### Running the frontend
 
 - Change to frontend folder with `cd frontend`
 - Install dependencies `npm install`
 - Run with `npm run dev`
 
-### Running the backend
+#### Running the backend
 
 - Change to backend folder with `cd backend`
 - Install dependencies `npm install`
 - Run with `npm run dev`
 
-### Running the database
+#### Running the database
  Replace `<PASSWORD>` with a secure password. `docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<PASSWORD>" -e "MSSQL_PID=Express" -p 1433:1433 -v box-db:/var/opt/mssql -d mcr.microsoft.com/mssql/server:2019-latest`. This command opens the database to port `1433`.
 
 # Images
