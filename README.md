@@ -3,7 +3,7 @@
 Full Stack application that let's you store box dimensions. Database hosted with Microsoft SQL inside Docker, which is run on a Raspberry Pi 4. [See here for images!](#images)
 
 > [!NOTE]
-This is still work in progress, and many things will change like adding proper tests. This project will be finished by mid-June and the readme will be updating again then with more instructions and information.
+This is still work in progress. This project will be finished by June 20th and the readme will be updating again then with more instructions and information.
 
 
 ## Info
@@ -42,11 +42,28 @@ This is still work in progress, and many things will change like adding proper t
 
 ## Instructions
 
-### Production
+### Production (Docker)
 
-TBD
+- Create two `.docker.env` files in both frontend and backend.
+
+- Frontend needs just one key, `VITE_BACKEND_URL`. It can be just localhost like `VITE_BACKEND_URL=http://localhost/api/`, but if you need to connect from other devices in the network, change the `localhost` to your machine's IP. For example `VITE_BACKEND_URL=http://192.168.0.115/api/`.
+
+- Backend has multiple values, set your desired password to the `<PASSWORD>` field. You may need to change the username from `sa` if you have a non-SA user.
+  ```
+  ACCEPT_EULA=Y
+  MSSQL_PORT=1433
+  MSSQL_SA_PASSWORD=<PASSWORD>
+  PORT=3000
+  FRONTEND_URL=http://localhost
+  DATABASE_URL="sqlserver://database;database=database;user=sa;password=<PASSWORD>;TrustServerCertificate=true"
+  ```
+
+- Run `docker-compose up` in the project root. Note that it may take a while on slower machines. If you are having issues, try restarting it or rebuilding it with `docker-compose up --build`. Database can take a while start on slow machines like Raspberry Pi. Usually it takes 30 seconds.
 
 ### Development
+
+- Create two `.env` files in both frontend and backend.
+- Put the same values as in production but to `.env`, not `.docker.env`. You need to add ports to the `FRONTEND_URL` and `VITE_BACKEND_URL`. If you are using the default ports, they are `VITE_BACKEND_URL=http://localhost:3000` and `FRONTEND_URL=http://localhost:5173`.
 
 #### Running the frontend
 
@@ -61,7 +78,7 @@ TBD
 - Run with `npm run dev`
 
 #### Running the database
- Replace `<PASSWORD>` with a secure password. `docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<PASSWORD>" -e "MSSQL_PID=Express" -p 1433:1433 -v box-db:/var/opt/mssql -d mcr.microsoft.com/mssql/server:2019-latest`. This command opens the database to port `1433`.
+ Replace `<PASSWORD>` with a secure password. `docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<PASSWORD>" -e "MSSQL_PID=Express" -p 1433:1433 -v box-db:/var/opt/mssql -d mcr.microsoft.com/mssql/server:2019-latest`. This command opens the database to port `1433`. Make sure the password is the same as in `.env` files!
 
 # Images
 
