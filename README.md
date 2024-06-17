@@ -2,10 +2,6 @@
 
 Full Stack application that let's you store box dimensions. Database hosted with Microsoft SQL inside Docker, which is run on a Raspberry Pi 4. [See here for images!](#images)
 
-> [!NOTE]
-This is still work in progress. This project will be finished by June 20th and the readme will be updating again then with more instructions and information.
-
-
 ## Info
 - Frontend made with TypeScript, React, Vite, TailwindCSS!
 - Backend made with TypeScript, Fastify, Prisma!
@@ -57,6 +53,8 @@ This is still work in progress. This project will be finished by June 20th and t
   FRONTEND_URL=http://localhost
   DATABASE_URL="sqlserver://database;database=database;user=sa;password=<PASSWORD>;TrustServerCertificate=true"
   ```
+
+- Change the `server_name` in `nginx.conf` to your machine's IP to allow connections from other devices in the network.
 
 - Run `docker-compose up` in the project root. Note that it may take a while on slower machines. If you are having issues, try restarting it or rebuilding it with `docker-compose up --build`. Database can take a while start on slow machines like Raspberry Pi. Usually it takes 30 seconds.
 
@@ -112,12 +110,11 @@ This is still work in progress. This project will be finished by June 20th and t
 ![search and language change](https://github.com/kristianka/boxdb-app/assets/49764796/1153994c-fd50-4041-9c08-4fd159c0750e)
 
 
-
-
-On small screens, the right one is after scrolling down
+### On mobile, the right one is after scrolling down
 
 <p float="left">
-  <img src="https://github.com/kristianka/boxdb-app/assets/49764796/6aa6e802-1d04-4182-b1f3-a73c23a59b47" width="400" />
-  <img src="https://github.com/kristianka/boxdb-app/assets/49764796/0747a8d8-3466-47b2-875f-063ddbff93b7" width="400" /> 
+  <img src="https://github.com/kristianka/boxdb-app/assets/49764796/11fc8194-8951-435f-b25d-6c8ba8f9d6bf" width="400" />
+  <img src="https://github.com/kristianka/boxdb-app/assets/49764796/2127197d-799d-4296-9d7f-b541cb59625b" width="400" /> 
 </p>
+
 
