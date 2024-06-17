@@ -24,7 +24,11 @@ const ChangeLanguageDropdown = () => {
   return (
     <div className="m-1 inline-flex items-center rounded-lg border border-gray-300 bg-gray-50 px-5 py-2.5 text-center text-sm font-medium hover:bg-gray-300">
       <span className={`fi mr-2 fi-${selectedLanguage}`}></span>
-      <Dropdown className="" label={t("language")} inline>
+      <Dropdown
+        className=""
+        label={<span className="hidden sm:block">{t("language")}</span>}
+        inline
+      >
         <Dropdown.Item
           className="rounded-md"
           onClick={() => handleLanguageChange("en")}

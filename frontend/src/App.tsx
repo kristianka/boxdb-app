@@ -67,15 +67,19 @@ function App() {
         <div className="m-3 md:col-span-3">
           <div className="mb-3 flex flex-wrap items-center justify-between">
             <h2 className="mb-5 text-xl">{t("boxes")}</h2>
-            <div className="flex">
-              <Search setSearch={setSearch} />
-              <PaginationCount
-                pagination={pagination}
-                setPagination={setPagination}
-              />
-              <Sort sort={sort} setSort={setSort} />
-              <NewBox boxes={boxes} setBoxes={setBoxes} />
-              <Refresh fetchBoxes={fetchBoxes} />
+            <div className="flex flex-wrap">
+              <div className="flex-1">
+                <Search setSearch={setSearch} />
+              </div>
+              <div className="flex">
+                <PaginationCount
+                  pagination={pagination}
+                  setPagination={setPagination}
+                />
+                <Sort sort={sort} setSort={setSort} />
+                <NewBox boxes={boxes} setBoxes={setBoxes} />
+                <Refresh fetchBoxes={fetchBoxes} />
+              </div>
             </div>
           </div>
           {error ? (

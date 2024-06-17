@@ -11,7 +11,7 @@ const PaginationCount = ({ pagination, setPagination }: props) => {
 
   // set pagination. 10, 25, 50, 100
   return (
-    <div className="m-1 inline-flex items-center rounded-lg border border-gray-300 bg-gray-50 px-5 py-2.5 text-center text-sm font-medium hover:bg-gray-300">
+    <div className="py-1.25 m-1 inline-flex items-center rounded-lg border border-gray-300 bg-gray-50 px-2.5 text-center text-sm font-medium hover:bg-gray-300 sm:px-5 sm:py-2.5">
       <Dropdown className="" label={t("show")} inline>
         <Dropdown.Item
           onClick={() => setPagination(10)}
