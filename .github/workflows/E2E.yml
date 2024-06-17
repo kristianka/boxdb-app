@@ -40,5 +40,8 @@ jobs:
             - name: Install dependencies
               run: cd frontend && npm install
 
+            - name: Install Playwright
+              run: npm install -g playwright
+
             - name: Run Playwright E2E tests
               run: cd frontend && npm run test:playwright
