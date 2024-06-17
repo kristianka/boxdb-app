@@ -37,6 +37,9 @@ jobs:
             - name: Wait for database to start and migrate
               run: sleep 30
 
+            - name: Install dependencies
+              run: cd frontend && npm install
+
             - name: Install PlayWright dependencies
               run: cd frontend && npx playwright install-deps
 
