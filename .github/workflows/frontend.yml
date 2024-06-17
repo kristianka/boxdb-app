@@ -29,17 +29,19 @@ jobs:
             - name: Run frontend lint
               run: cd frontend && npm run lint
 
-    # temporarily disabled until upgraded to Playwright and fixed headless tests
-    # test:
-    #     runs-on: ubuntu-22.04
-    #     steps:
-    #         - uses: actions/checkout@v3
-    #         - uses: actions/setup-node@v3
-    #           with:
-    #               node-version: "20"
+    test:
+        runs-on: ubuntu-22.04
+        steps:
+            - uses: actions/checkout@v3
+            - uses: actions/setup-node@v3
+              with:
+                  node-version: "22"
 
-    #         - name: Install dependencies for frontend
-    #           run: cd frontend && npm install
+            - name: Start docker-compose
+              run: docker-compose up -d
 
-    #         - name: Run frontend tests
-    #           run: cd frontend && npm run test
+            - name: Wait for database to start and migrate
+              run: sleep 30
+
+            - name: Run Playwright E2E tests
+              run: cd frontend && npm run test:playwright

@@ -143,6 +143,7 @@ const NewBoxModal = ({ openModal, setOpenModal, boxes, setBoxes }: props) => {
               <Textarea
                 rows={5}
                 id="comment"
+                data-testid="comment"
                 value={comment}
                 placeholder={t("enterComment")}
                 helperText={t("createBoxIdTip") + "."}
