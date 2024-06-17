@@ -1,0 +1,41 @@
+name: E2E tests
+
+on:
+    push:
+        branches:
+            - main
+        paths-ignore:
+            - "documentation/**"
+            - "backend/**"
+
+    pull_request:
+        branches: [main]
+        types: [opened, synchronize]
+        paths-ignore:
+            - "documentation/**"
+
+jobs:
+    test:
+        runs-on: ubuntu-22.04
+        steps:
+            - uses: actions/checkout@v3
+            - uses: actions/setup-node@v3
+              with:
+                  node-version: "22"
+
+            - name: Setup .docker.env for frontend
+              run: |
+                  echo "FRONTEND_ENV_VAR=${{ secrets.FRONTEND_DOCKER_ENV_VALUES }}" > frontend/.docker.env
+
+            - name: Setup .docker.env for backend
+              run: |
+                  echo "BACKEND_ENV_VAR=${{ secrets.BACKEND_DOCKER_ENV_VALUES }}" > backend/.docker.env
+
+            - name: Start docker-compose
+              run: docker-compose up -d
+
+            - name: Wait for database to start and migrate
+              run: sleep 30
+
+            - name: Run Playwright E2E tests
+              run: cd frontend && npm run test:playwright
