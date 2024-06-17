@@ -1,6 +1,7 @@
 .env
 .docker.env
 
+
 # Logs
 logs
 *.log
@@ -29,3 +30,4 @@ dist-ssr
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+/e2e/screenshots/

@@ -151,7 +151,9 @@ const NewBoxModal = ({ openModal, setOpenModal, boxes, setBoxes }: props) => {
             </div>
             {/* submit */}
             <div className="w-full">
-              <Button onClick={handleSubmit}>{t("add")}</Button>
+              <Button data-testid="submitBoxButton" onClick={handleSubmit}>
+                {t("add")}
+              </Button>
             </div>
           </div>
         </Modal.Body>
