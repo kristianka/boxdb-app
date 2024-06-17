@@ -22,7 +22,7 @@ This is still work in progress, and many things will change like adding proper t
 - Proper form validation with feedback (will also be in backend of course)
 - The application is fully responsive to all screen types.
   - Note how the table removes some rows when the screen gets smaller, buttons don't overflow but go to a new line, text doesn't overflow, box information goes below the table and not side-by-side, and other small changes happen.
-- Custom made components that follow guidelines
+- Custom made components that are consistent
 - Undo changes when modifying box info
 - Pagination for the boxes list
   - You can change how many boxes per page
@@ -31,6 +31,7 @@ This is still work in progress, and many things will change like adding proper t
   - Sort by last modified, when created (asc or desc) or by id (asc or desc)
 - Language selection
   - Languages are Finnish and English
+- Toast notifications and proper error handling
 
 ### Backend features
 - Get boxes
@@ -64,7 +65,37 @@ TBD
 
 # Images
 
-![image](https://github.com/kristianka/boxdb-app/assets/49764796/c0e14723-8d8f-4657-9b0e-e7e19a3413df)
+### Frontpage
+
+![frontpage](https://github.com/kristianka/boxdb-app/assets/49764796/1fdd7d53-e67e-4022-b272-d1833465ec14)
+
+
+### Adding a box
+
+![adding a box](https://github.com/kristianka/boxdb-app/assets/49764796/0d857f62-9947-4736-8fd8-f4ffa0bc7f63)
+
+
+### Box details
+
+![box details](https://github.com/kristianka/boxdb-app/assets/49764796/96951216-e9fd-468c-9501-dab988c24b45)
+
+
+### Sorting options
+
+![sorting](https://github.com/kristianka/boxdb-app/assets/49764796/197ac775-b4ca-4f6e-a793-69ce18927da9)
+
+
+### Pagination options
+
+![pagination](https://github.com/kristianka/boxdb-app/assets/49764796/47b5bde3-20df-46b5-b1d5-65f2b759d8dd)
+
+
+### Search and change language
+
+![search and language change](https://github.com/kristianka/boxdb-app/assets/49764796/1153994c-fd50-4041-9c08-4fd159c0750e)
+
+
+
 
 On small screens, the right one is after scrolling down
 
