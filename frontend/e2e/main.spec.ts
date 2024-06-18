@@ -27,8 +27,7 @@ test.describe("Boxdb-app frontend", async () => {
   });
 
   test("Added box is displayed in the list", async ({ page }) => {
-    const boxLocator = page.locator(`[data-testid="BoxListItem"]`);
-    await expect(boxLocator).toBeVisible();
+    await expect(page.locator('text="This is a test box 1"')).toHaveCount(1);
   });
 
   // test("You can click the box and view detailed info", async ({ page }) => {
