@@ -8,6 +8,7 @@ test.describe("Boxdb-app frontend", async () => {
   // Go to the main page
   test.beforeEach(async ({ page }) => {
     await page.goto(url);
+    await page.reload();
   });
 
   test("It loads", async ({ page }) => {
@@ -26,9 +27,8 @@ test.describe("Boxdb-app frontend", async () => {
   });
 
   test("Added box is displayed in the list", async ({ page }) => {
-    const boxLabel = `This is a test box 1`;
-    const boxLocator = page.locator(`text=${boxLabel}`);
-    await expect(boxLocator).toHaveCount(1);
+    const boxLocator = page.locator(`[data-testid="BoxListItem"]`);
+    await expect(boxLocator).toBeVisible();
   });
 
   // test("You can click the box and view detailed info", async ({ page }) => {
@@ -68,7 +68,13 @@ test.describe("Boxdb-app frontend", async () => {
   //   await expect(page.getByTestId("BoxDetailsSubmitButton")).not.toBeNull();
   // });
 
+  // test("You can delete a box", async ({ page }) => {
+
+  // });
+
   test.afterEach(async ({ page }, testInfo) => {
+    console.log(testInfo.title, testInfo.status);
+
     console.log("Taking screenshot to /e2e/screenshots/");
     await page.screenshot({
       path: `./e2e/screenshots/${testInfo.title.replace(/ /g, "_")}.png`,

@@ -38,8 +38,9 @@ const BoxList = ({
         </div>
       ) : (
         <>
-          {displayedBoxes.map((box) => (
+          {displayedBoxes.map((box, index) => (
             <BoxListItem
+              data-testid={`BoxListItem-${index}`}
               key={box.id}
               box={box}
               selectedBox={selectedBox}
