@@ -18,6 +18,7 @@ const BoxListItem = ({ box, selectedBox, setSelectedBox }: props) => {
 
   return (
     <button
+      key={box.id}
       data-testid="BoxListItem"
       onClick={setSelected}
       className={`mb-2 w-full rounded-md p-2 text-left ${

@@ -76,12 +76,18 @@ const BoxDetails = ({ boxes, setBoxes, box }: props) => {
   }, [box, reset]);
 
   return (
-    <div className="rounded-md bg-white">
+    <div key={box.id} className="rounded-md bg-white">
       <div className="m-5 mb-5 flex flex-col">
         <div className="mt-3 flex flex-wrap items-center justify-between">
-          <h2 className="mb-2 flex-shrink-0 truncate text-xl">ID: {id}</h2>
+          <h2
+            data-testid="BoxDetailsId"
+            className="mb-2 flex-shrink-0 truncate text-xl"
+          >
+            ID: {id}
+          </h2>
           <div className="flex">
             <button
+              data-testid="BoxDetailsUndoButton"
               type="button"
               onClick={undoChanges}
               title={t("undoChanges")}
@@ -99,6 +105,7 @@ const BoxDetails = ({ boxes, setBoxes, box }: props) => {
               </svg>
             </button>
             <button
+              data-testid="BoxDetailsDeleteButton"
               type="button"
               onClick={handleDelete}
               title={t("deleteBox")}
@@ -125,11 +132,11 @@ const BoxDetails = ({ boxes, setBoxes, box }: props) => {
         )}
 
         <div className="mb-5 mt-3">
-          <p>
+          <p data-testid="BoxDetailsCreatedAt">
             {t("createdAt")} {new Date(box.createdAt).toLocaleString()}
           </p>
           {box.updatedAt !== box.createdAt && (
-            <p>
+            <p data-testid="BoxDetailsUpdatedAt">
               {t("updatedAt")} {new Date(box.updatedAt).toLocaleString()}
             </p>
           )}
@@ -139,6 +146,7 @@ const BoxDetails = ({ boxes, setBoxes, box }: props) => {
           <div className="mb-3">
             <label htmlFor="width">{t("width")}</label>
             <input
+              data-testid="BoxDetailsWidth"
               className="mt-2 w-full rounded-md border-2 border-gray-300 bg-gray-50 p-2"
               name="width"
               type="number"
@@ -150,6 +158,7 @@ const BoxDetails = ({ boxes, setBoxes, box }: props) => {
           <div className="mb-3">
             <label htmlFor="height">{t("height")}</label>
             <input
+              data-testid="BoxDetailsHeight"
               className="mt-2 w-full rounded-md border-2 border-gray-300 bg-gray-50 p-2"
               name="height"
               type="number"
@@ -161,6 +170,7 @@ const BoxDetails = ({ boxes, setBoxes, box }: props) => {
           <div className="mb-3">
             <label htmlFor="depth">{t("depth")}</label>
             <input
+              data-testid="BoxDetailsDepth"
               className="mt-2 w-full rounded-md border-2 border-gray-300 bg-gray-50 p-2"
               name="depth"
               type="number"
@@ -172,6 +182,7 @@ const BoxDetails = ({ boxes, setBoxes, box }: props) => {
           <div className="mb-3">
             <label htmlFor="comment">{t("comment")}: </label>
             <textarea
+              data-testid="BoxDetailsComment"
               className="mt-2 w-full rounded-md border-2 border-gray-300 bg-gray-50 p-2"
               name="comment"
               value={comment}
@@ -181,6 +192,7 @@ const BoxDetails = ({ boxes, setBoxes, box }: props) => {
           </div>
           {/* submit */}
           <button
+            data-testid="BoxDetailsSubmitButton"
             type="button"
             title={t("saveChanges")}
             className="mb-5 inline-flex items-center rounded-lg border border-gray-300 bg-gray-50 px-5 py-2.5 text-center text-sm font-medium hover:bg-green-400"

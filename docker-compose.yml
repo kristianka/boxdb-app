@@ -7,6 +7,7 @@ services:
       - ./backend/.docker.env
     volumes:
     - box-db:/var/opt/mssql
+    restart: unless-stopped
 
 
   frontend:
@@ -16,6 +17,7 @@ services:
       dockerfile: ./Dockerfile
     env_file:
         - ./frontend/.docker.env
+    restart: unless-stopped
 
 
   backend:
@@ -27,6 +29,7 @@ services:
       - ./backend/.docker.env
     depends_on:
       - database
+    restart: unless-stopped
 
   nginx:
     container_name: ngix
@@ -38,6 +41,7 @@ services:
     depends_on:
       - frontend
       - backend
+    restart: unless-stopped
 
 volumes:
   box-db:
