@@ -51,7 +51,7 @@ Full Stack application that let's you store box dimensions. Database hosted with
   MSSQL_SA_PASSWORD=<PASSWORD>
   PORT=3000
   FRONTEND_URL=http://localhost
-  DATABASE_URL="sqlserver://database;database=database;user=sa;password=<PASSWORD>;TrustServerCertificate=true"
+  DATABASE_URL=sqlserver://database;database=database;user=sa;password=<PASSWORD>;TrustServerCertificate=true
   ```
 
 - Change the `server_name` in `nginx.conf` to your machine's IP to allow connections from other devices in the network.
@@ -61,7 +61,7 @@ Full Stack application that let's you store box dimensions. Database hosted with
 ### Development
 
 - Create two `.env` files in both frontend and backend.
-- Put the same values as in production but to `.env`, not `.docker.env`. You need to add ports to the `FRONTEND_URL` and `VITE_BACKEND_URL`. If you are using the default ports, they are `VITE_BACKEND_URL=http://localhost:3000` and `FRONTEND_URL=http://localhost:5173`.
+- Put the same values as in production but to `.env`, not `.docker.env`. You need to add ports to the `FRONTEND_URL` and `VITE_BACKEND_URL`. If you are using the default ports, they are `VITE_BACKEND_URL=http://localhost:3000` and `FRONTEND_URL=http://localhost:5173`. Database url might need "-marks around the url on Windows!
 
 #### Running the frontend
 
