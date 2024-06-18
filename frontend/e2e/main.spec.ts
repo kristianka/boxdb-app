@@ -5,7 +5,6 @@ import { test, expect } from "@playwright/test";
 const url = "http://localhost";
 
 test.describe("Boxdb-app frontend", async () => {
-  const random = Math.floor(Math.random() * 1000);
   // Go to the main page
   test.beforeEach(async ({ page }) => {
     await page.goto(url);
@@ -18,52 +17,81 @@ test.describe("Boxdb-app frontend", async () => {
   });
 
   test("You can add a box", async ({ page }) => {
+    await expect(page.locator('text="No boxes found."')).toHaveCount(1);
     await page.click("[data-testid=addBoxButton]");
     await page.fill('input[id="width"]', "10");
     await page.fill('input[id="height"]', "20");
     await page.fill('input[id="depth"]', "30");
-    await page.fill('[data-testid="comment"]', `This is a test box ${random}`);
+    await page.fill('[data-testid="comment"]', `This is a test box 1`);
     await page.click("[data-testid=submitBoxButton]");
   });
 
   test("Added box is displayed in the list", async ({ page }) => {
-    const boxLabel = `This is a test box ${random}`;
-    const box = await page.getByLabel(boxLabel);
-    expect(box).not.toBeNull();
+    await expect(page.locator('text="No boxes found."')).toHaveCount(0);
+    await expect(page.locator('text="This is a test box 1"')).toHaveCount(1);
   });
 
-  // test("You can click the box and view detailed info", async ({ page }) => {
-  //   const boxLabel = `This is a test box ${random}`;
-  //   const boxListItem = await page
-  //     .locator('[data-testid="BoxListItem"]')
-  //     .first();
-  //   expect(boxListItem).not.toBeNull();
-  //   await boxListItem.click();
+  test("You can click the box and view detailed info", async ({ page }) => {
+    await page.waitForSelector('[data-testid="BoxListItem"]', {
+      state: "visible",
+    });
+    const boxListItem = await page
+      .locator('[data-testid="BoxListItem"]')
+      .first();
 
-  //   const msg = page.getByText("Click on a box to see its information");
-  //   await expect(msg).toHaveCount(0);
+    await expect(boxListItem).not.toBeNull();
+    await boxListItem.click();
 
-  //   // Check that the box details are displayed
-  //   await expect(page.getByTestId("BoxDetailsId")).not.toBeNull();
-  //   await expect(page.getByTestId("BoxDetailsUndoButton")).not.toBeNull();
-  //   await expect(page.getByTestId("BoxDetailsDeleteButton")).not.toBeNull();
+    const msg = page.getByText("Click on a box to see its information");
+    await expect(msg).toHaveCount(0);
 
-  //   // Verify the width, height, and depth input values. needs to be done like this
-  //   // since they are number inputs
-  //   await expect(page.locator('[data-testid="BoxDetailsWidth"]')).toHaveValue(
-  //     "10",
-  //   );
-  //   await expect(page.locator('[data-testid="BoxDetailsHeight"]')).toHaveValue(
-  //     "20",
-  //   );
-  //   await expect(page.locator('[data-testid="BoxDetailsDepth"]')).toHaveValue(
-  //     "30",
-  //   );
-  //   await expect(page.getByTestId("BoxDetailsComment")).toHaveText(boxLabel);
-  //   await expect(page.getByTestId("BoxDetailsSubmitButton")).not.toBeNull();
-  // });
+    // Check that the box details are displayed
+    await expect(page.getByTestId("BoxDetailsId")).not.toBeNull();
+    await expect(page.getByTestId("BoxDetailsUndoButton")).not.toBeNull();
+    await expect(page.getByTestId("BoxDetailsDeleteButton")).not.toBeNull();
+
+    // Verify the width, height, and depth input values. needs to be done like this
+    // since they are number inputs
+    await expect(page.locator('[data-testid="BoxDetailsWidth"]')).toHaveValue(
+      "10",
+    );
+    await expect(page.locator('[data-testid="BoxDetailsHeight"]')).toHaveValue(
+      "20",
+    );
+    await expect(page.locator('[data-testid="BoxDetailsDepth"]')).toHaveValue(
+      "30",
+    );
+    await expect(page.getByTestId("BoxDetailsComment")).toHaveText(
+      "This is a test box 1",
+    );
+    await expect(page.getByTestId("BoxDetailsSubmitButton")).not.toBeNull();
+  });
+
+  test("You can delete a box", async ({ page }) => {
+    await page.waitForSelector('[data-testid="BoxListItem"]', {
+      state: "visible",
+    });
+    const boxListItem = await page
+      .locator('[data-testid="BoxListItem"]')
+      .first();
+
+    await expect(boxListItem).not.toBeNull();
+    await boxListItem.click();
+
+    // Setup listener for the confirmation dialog before clicking the delete button
+    page.on("dialog", async (dialog) => {
+      await dialog.accept();
+    });
+
+    await page.click("[data-testid=BoxDetailsDeleteButton]");
+    // check that removed box is not in the list
+    await expect(boxListItem).toBeHidden();
+    await expect(page.locator('text="No boxes found."')).toHaveCount(1);
+  });
 
   test.afterEach(async ({ page }, testInfo) => {
+    console.log(testInfo.title, testInfo.status);
+
     console.log("Taking screenshot to /e2e/screenshots/");
     await page.screenshot({
       path: `./e2e/screenshots/${testInfo.title.replace(/ /g, "_")}.png`,

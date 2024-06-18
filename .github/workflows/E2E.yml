@@ -23,16 +23,13 @@ jobs:
               with:
                   node-version: "22"
 
-            - name: Setup .docker.env for frontend
+            - name: Setup .docker.env for services
               run: |
-                  echo "FRONTEND_ENV_VAR=${{ secrets.FRONTEND_DOCKER_ENV_VALUES }}" > frontend/.docker.env
-
-            - name: Setup .docker.env for backend
-              run: |
-                  echo "BACKEND_ENV_VAR=${{ secrets.BACKEND_DOCKER_ENV_VALUES }}" > backend/.docker.env
+                  echo "${{ secrets.ENV_VALUES }}" > frontend/.docker.env
+                  echo "${{ secrets.ENV_VALUES }}" > backend/.docker.env
 
             - name: Start docker-compose
-              run: docker-compose up -d
+              run: docker-compose up --build -d
 
             - name: Install dependencies
               run: cd frontend && npm install
@@ -45,6 +42,9 @@ jobs:
 
             - name: Install Playwright browsers
               run: cd frontend && npx playwright install
+
+            # - name: Wait for database to start and migrate
+            #   run: sleep 120
 
             - name: Run Playwright E2E tests
               run: cd frontend && npm run test:playwright
