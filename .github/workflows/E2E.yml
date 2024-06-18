@@ -34,6 +34,9 @@ jobs:
             - name: Start docker-compose
               run: docker-compose up -d
 
+            - name: Wait for database to start and migrate
+              run: sleep 60
+
             - name: Install dependencies
               run: cd frontend && npm install
 
