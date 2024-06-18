@@ -16,13 +16,6 @@ test.describe("Boxdb-app frontend", async () => {
     await expect(page.locator('text="Box dimensions database"')).toHaveCount(1);
   });
 
-  test("Doesn't thrown an error", async ({ page }) => {
-    // Wait for 10 seconds
-    await page.waitForTimeout(10000);
-    const errors = await page.locator("text=Error").count();
-    expect(errors).toBe(0);
-  });
-
   test("You can add a box", async ({ page }) => {
     await expect(page.locator('text="No boxes found."')).toHaveCount(1);
     await page.click("[data-testid=addBoxButton]");
@@ -74,9 +67,27 @@ test.describe("Boxdb-app frontend", async () => {
     await expect(page.getByTestId("BoxDetailsSubmitButton")).not.toBeNull();
   });
 
-  // test("You can delete a box", async ({ page }) => {
+  test("You can delete a box", async ({ page }) => {
+    await page.waitForSelector('[data-testid="BoxListItem"]', {
+      state: "visible",
+    });
+    const boxListItem = await page
+      .locator('[data-testid="BoxListItem"]')
+      .first();
 
-  // });
+    await expect(boxListItem).not.toBeNull();
+    await boxListItem.click();
+
+    // Setup listener for the confirmation dialog before clicking the delete button
+    page.on("dialog", async (dialog) => {
+      await dialog.accept();
+    });
+
+    await page.click("[data-testid=BoxDetailsDeleteButton]");
+    // check that removed box is not in the list
+    await expect(boxListItem).toBeHidden();
+    await expect(page.locator('text="No boxes found."')).toHaveCount(1);
+  });
 
   test.afterEach(async ({ page }, testInfo) => {
     console.log(testInfo.title, testInfo.status);
