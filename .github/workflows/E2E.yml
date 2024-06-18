@@ -32,7 +32,7 @@ jobs:
                   echo "BACKEND_ENV_VAR=${{ secrets.BACKEND_DOCKER_ENV_VALUES }}" > backend/.docker.env
 
             - name: Start docker-compose
-              run: docker-compose up -d
+              run: docker-compose up -d && sleep 120
 
             - name: Install dependencies
               run: cd frontend && npm install
@@ -46,8 +46,8 @@ jobs:
             - name: Install Playwright browsers
               run: cd frontend && npx playwright install
 
-            - name: Wait for database to start and migrate
-              run: sleep 120
+            # - name: Wait for database to start and migrate
+            #   run: sleep 120
 
             - name: Run Playwright E2E tests
               run: cd frontend && npm run test:playwright
