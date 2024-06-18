@@ -8,7 +8,6 @@ test.describe("Boxdb-app frontend", async () => {
   // Go to the main page
   test.beforeEach(async ({ page }) => {
     await page.goto(url);
-    await page.reload();
   });
 
   test("It loads", async ({ page }) => {
@@ -17,8 +16,14 @@ test.describe("Boxdb-app frontend", async () => {
     await expect(page.locator('text="Box dimensions database"')).toHaveCount(1);
   });
 
+  test("Doesn't thrown an error", async ({ page }) => {
+    // Wait for 10 seconds
+    await page.waitForTimeout(10000);
+    const errors = await page.locator("text=Error").count();
+    expect(errors).toBe(0);
+  });
+
   test("You can add a box", async ({ page }) => {
-    console.log("PAGE", page);
     await expect(page.locator('text="No boxes found."')).toHaveCount(1);
     await page.click("[data-testid=addBoxButton]");
     await page.fill('input[id="width"]', "10");
