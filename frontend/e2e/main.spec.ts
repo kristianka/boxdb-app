@@ -5,7 +5,6 @@ import { test, expect } from "@playwright/test";
 const url = "http://localhost";
 
 test.describe("Boxdb-app frontend", async () => {
-  const random = Math.floor(Math.random() * 1000);
   // Go to the main page
   test.beforeEach(async ({ page }) => {
     await page.goto(url);
@@ -22,12 +21,12 @@ test.describe("Boxdb-app frontend", async () => {
     await page.fill('input[id="width"]', "10");
     await page.fill('input[id="height"]', "20");
     await page.fill('input[id="depth"]', "30");
-    await page.fill('[data-testid="comment"]', `This is a test box ${random}`);
+    await page.fill('[data-testid="comment"]', `This is a test box 1`);
     await page.click("[data-testid=submitBoxButton]");
   });
 
   test("Added box is displayed in the list", async ({ page }) => {
-    const boxLabel = `This is a test box ${random}`;
+    const boxLabel = `This is a test box 1`;
     const boxLocator = page.locator(`text=${boxLabel}`);
     await expect(boxLocator).toHaveCount(1);
   });
