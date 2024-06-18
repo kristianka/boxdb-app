@@ -34,9 +34,6 @@ jobs:
             - name: Start docker-compose
               run: docker-compose up -d
 
-            - name: Wait for database to start and migrate
-              run: sleep 30
-
             - name: Install dependencies
               run: cd frontend && npm install
 
@@ -48,6 +45,9 @@ jobs:
 
             - name: Install Playwright browsers
               run: cd frontend && npx playwright install
+
+            - name: Wait for database to start and migrate
+              run: sleep 120
 
             - name: Run Playwright E2E tests
               run: cd frontend && npm run test:playwright
