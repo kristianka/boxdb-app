@@ -31,13 +31,6 @@ jobs:
             - name: Start docker-compose
               run: docker-compose up --build -d
 
-            - name: Wait and print logs
-              run: |
-                  echo "Waiting for services to initialize..."
-                  sleep 120  # Or use a more dynamic wait approach
-                  echo "Services should be initialized, printing logs..."
-                  docker-compose logs
-
             - name: Install dependencies
               run: cd frontend && npm install
 
