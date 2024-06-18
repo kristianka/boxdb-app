@@ -38,42 +38,41 @@ test.describe("Boxdb-app frontend", async () => {
     await expect(page.locator('text="This is a test box 1"')).toHaveCount(1);
   });
 
-  // test("You can click the box and view detailed info", async ({ page }) => {
-  //   const boxLabel = `This is a test box ${random}`;
+  test("You can click the box and view detailed info", async ({ page }) => {
+    await page.waitForSelector('[data-testid="BoxListItem"]', {
+      state: "visible",
+    });
+    const boxListItem = await page
+      .locator('[data-testid="BoxListItem"]')
+      .first();
 
-  //   await page.waitForSelector('[data-testid="BoxListItem"]', {
-  //     state: "visible",
-  //   });
-  //   const boxListItem = await page
-  //     .locator('[data-testid="BoxListItem"]')
-  //     .first();
+    await expect(boxListItem).not.toBeNull();
+    await boxListItem.click();
 
-  //   console.log("boxListItem", boxListItem);
-  //   await expect(boxListItem).not.toBeNull();
-  //   await boxListItem.click();
+    const msg = page.getByText("Click on a box to see its information");
+    await expect(msg).toHaveCount(0);
 
-  //   const msg = page.getByText("Click on a box to see its information");
-  //   await expect(msg).toHaveCount(0);
+    // Check that the box details are displayed
+    await expect(page.getByTestId("BoxDetailsId")).not.toBeNull();
+    await expect(page.getByTestId("BoxDetailsUndoButton")).not.toBeNull();
+    await expect(page.getByTestId("BoxDetailsDeleteButton")).not.toBeNull();
 
-  //   // Check that the box details are displayed
-  //   await expect(page.getByTestId("BoxDetailsId")).not.toBeNull();
-  //   await expect(page.getByTestId("BoxDetailsUndoButton")).not.toBeNull();
-  //   await expect(page.getByTestId("BoxDetailsDeleteButton")).not.toBeNull();
-
-  //   // Verify the width, height, and depth input values. needs to be done like this
-  //   // since they are number inputs
-  //   await expect(page.locator('[data-testid="BoxDetailsWidth"]')).toHaveValue(
-  //     "10",
-  //   );
-  //   await expect(page.locator('[data-testid="BoxDetailsHeight"]')).toHaveValue(
-  //     "20",
-  //   );
-  //   await expect(page.locator('[data-testid="BoxDetailsDepth"]')).toHaveValue(
-  //     "30",
-  //   );
-  //   await expect(page.getByTestId("BoxDetailsComment")).toHaveText(boxLabel);
-  //   await expect(page.getByTestId("BoxDetailsSubmitButton")).not.toBeNull();
-  // });
+    // Verify the width, height, and depth input values. needs to be done like this
+    // since they are number inputs
+    await expect(page.locator('[data-testid="BoxDetailsWidth"]')).toHaveValue(
+      "10",
+    );
+    await expect(page.locator('[data-testid="BoxDetailsHeight"]')).toHaveValue(
+      "20",
+    );
+    await expect(page.locator('[data-testid="BoxDetailsDepth"]')).toHaveValue(
+      "30",
+    );
+    await expect(page.getByTestId("BoxDetailsComment")).toHaveText(
+      "This is a test box 1",
+    );
+    await expect(page.getByTestId("BoxDetailsSubmitButton")).not.toBeNull();
+  });
 
   // test("You can delete a box", async ({ page }) => {
 
