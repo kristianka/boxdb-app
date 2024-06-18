@@ -34,9 +34,14 @@ test.describe("Boxdb-app frontend", async () => {
 
   test("You can click the box and view detailed info", async ({ page }) => {
     const boxLabel = `This is a test box ${random}`;
+
+    await page.waitForSelector('[data-testid="BoxListItem"]', {
+      state: "visible",
+    });
     const boxListItem = await page
       .locator('[data-testid="BoxListItem"]')
       .first();
+
     console.log("boxListItem", boxListItem);
     await expect(boxListItem).not.toBeNull();
     await boxListItem.click();
