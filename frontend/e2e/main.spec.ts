@@ -23,20 +23,20 @@ test.describe("Boxdb-app frontend", async () => {
     expect(errors).toBe(0);
   });
 
-  // test("You can add a box", async ({ page }) => {
-  //   await expect(page.locator('text="No boxes found."')).toHaveCount(1);
-  //   await page.click("[data-testid=addBoxButton]");
-  //   await page.fill('input[id="width"]', "10");
-  //   await page.fill('input[id="height"]', "20");
-  //   await page.fill('input[id="depth"]', "30");
-  //   await page.fill('[data-testid="comment"]', `This is a test box 1`);
-  //   await page.click("[data-testid=submitBoxButton]");
-  // });
+  test("You can add a box", async ({ page }) => {
+    await expect(page.locator('text="No boxes found."')).toHaveCount(1);
+    await page.click("[data-testid=addBoxButton]");
+    await page.fill('input[id="width"]', "10");
+    await page.fill('input[id="height"]', "20");
+    await page.fill('input[id="depth"]', "30");
+    await page.fill('[data-testid="comment"]', `This is a test box 1`);
+    await page.click("[data-testid=submitBoxButton]");
+  });
 
-  // test("Added box is displayed in the list", async ({ page }) => {
-  //   await expect(page.locator('text="No boxes found."')).toHaveCount(0);
-  //   await expect(page.locator('text="This is a test box 1"')).toHaveCount(1);
-  // });
+  test("Added box is displayed in the list", async ({ page }) => {
+    await expect(page.locator('text="No boxes found."')).toHaveCount(0);
+    await expect(page.locator('text="This is a test box 1"')).toHaveCount(1);
+  });
 
   // test("You can click the box and view detailed info", async ({ page }) => {
   //   const boxLabel = `This is a test box ${random}`;
