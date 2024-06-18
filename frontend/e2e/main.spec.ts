@@ -18,6 +18,7 @@ test.describe("Boxdb-app frontend", async () => {
   });
 
   test("You can add a box", async ({ page }) => {
+    await expect(page.locator('text="No boxes found."')).toHaveCount(1);
     await page.click("[data-testid=addBoxButton]");
     await page.fill('input[id="width"]', "10");
     await page.fill('input[id="height"]', "20");
@@ -27,6 +28,7 @@ test.describe("Boxdb-app frontend", async () => {
   });
 
   test("Added box is displayed in the list", async ({ page }) => {
+    await expect(page.locator('text="No boxes found."')).toHaveCount(0);
     await expect(page.locator('text="This is a test box 1"')).toHaveCount(1);
   });
 
