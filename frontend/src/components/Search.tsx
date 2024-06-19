@@ -22,7 +22,7 @@ const Search = ({ setSearch }: props) => {
         <input
           onChange={changeValue}
           type="search"
-          id="default-search"
+          data-testid="searchInput"
           className="block w-full truncate rounded-lg border border-gray-300 bg-gray-50 p-4 pr-10 text-sm text-gray-900"
           placeholder={t("searchPlaceholder")}
           required

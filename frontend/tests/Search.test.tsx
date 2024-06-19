@@ -18,15 +18,15 @@ describe("Search", () => {
   });
 
   test("search input works correctly", async () => {
-    const { getByPlaceholderText } = render(<Search setSearch={mockHandler} />);
-    const input = getByPlaceholderText("Search by comment");
+    const { getByTestId } = render(<Search setSearch={mockHandler} />);
+    const input = getByTestId("searchInput");
     await user.type(input, "test");
     expect(mockHandler).toHaveBeenCalledWith("test");
   });
 
   test("page isn't refreshed when user presses enter", async () => {
-    const { getByPlaceholderText } = render(<Search setSearch={mockHandler} />);
-    const input = getByPlaceholderText("Search by comment");
+    const { getByTestId } = render(<Search setSearch={mockHandler} />);
+    const input = getByTestId("searchInput");
     await user.type(input, "{enter}");
     expect(mockHandler).not.toHaveBeenCalled();
   });
