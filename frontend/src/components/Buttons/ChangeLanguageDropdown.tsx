@@ -26,11 +26,19 @@ const ChangeLanguageDropdown = () => {
       <span className={`fi mr-2 fi-${selectedLanguage}`}></span>
       <Dropdown
         className=""
-        label={<span className="hidden sm:block">{t("language")}</span>}
+        label={
+          <span
+            data-testid="changeLanguageDropdown"
+            className="hidden sm:block"
+          >
+            {t("language")}
+          </span>
+        }
         inline
       >
         <Dropdown.Item
           className="rounded-md"
+          data-testid="changeLanguageDropdownEn"
           onClick={() => handleLanguageChange("en")}
         >
           <span className="fi fi-gb mr-2"></span>
@@ -38,6 +46,7 @@ const ChangeLanguageDropdown = () => {
         </Dropdown.Item>
         <Dropdown.Item
           className="rounded-md"
+          data-testid="changeLanguageDropdownFi"
           onClick={() => handleLanguageChange("fi")}
         >
           <span className="fi fi-fi mr-2"></span>

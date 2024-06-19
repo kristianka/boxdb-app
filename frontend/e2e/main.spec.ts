@@ -10,12 +10,15 @@ test.describe("Boxdb-app frontend", async () => {
     await page.goto(url);
   });
 
+  // Frontend is reachable. If backend is down like missing env values,
+  // later tests will fail
   test("It loads", async ({ page }) => {
     const title = await page.title();
     expect(title).toBe("Box database");
-    await expect(page.locator('text="Box dimensions database"')).toHaveCount(1);
+    await expect(page.locator('text="Box database"')).toHaveCount(1);
   });
 
+  // Add a box
   test("You can add a box", async ({ page }) => {
     await expect(page.locator('text="No boxes found."')).toHaveCount(1);
     await page.click("[data-testid=addBoxButton]");
@@ -26,6 +29,7 @@ test.describe("Boxdb-app frontend", async () => {
     await page.click("[data-testid=submitBoxButton]");
   });
 
+  // Make sure the addedd box is shown in the list
   test("Added box is displayed in the list", async ({ page }) => {
     await expect(page.locator('text="No boxes found."')).toHaveCount(0);
     await expect(page.locator('text="This is a test box 1"')).toHaveCount(1);
@@ -67,6 +71,7 @@ test.describe("Boxdb-app frontend", async () => {
     await expect(page.getByTestId("BoxDetailsSubmitButton")).not.toBeNull();
   });
 
+  // Delete the added box
   test("You can delete a box", async ({ page }) => {
     await page.waitForSelector('[data-testid="BoxListItem"]', {
       state: "visible",
@@ -87,6 +92,17 @@ test.describe("Boxdb-app frontend", async () => {
     // check that removed box is not in the list
     await expect(boxListItem).toBeHidden();
     await expect(page.locator('text="No boxes found."')).toHaveCount(1);
+  });
+
+  // You can change the language from the button in navbar
+  test("You can change the language", async ({ page }) => {
+    await page.click("[data-testid=changeLanguageDropdown]");
+    await page.click('[data-testid="changeLanguageDropdownFi"]');
+    await expect(page.locator('text="Laatikkotietokanta"')).toHaveCount(1);
+
+    await page.click("[data-testid=changeLanguageDropdown]");
+    await page.click('[data-testid="changeLanguageDropdownEn"]');
+    await expect(page.locator('text="Box database"')).toHaveCount(1);
   });
 
   test.afterEach(async ({ page }, testInfo) => {
