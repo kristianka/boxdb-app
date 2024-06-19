@@ -16,6 +16,7 @@ on:
 
 jobs:
     test:
+        name: Playwright E2E tests
         runs-on: ubuntu-22.04
         steps:
             - uses: actions/checkout@v3
@@ -42,9 +43,6 @@ jobs:
 
             - name: Install Playwright browsers
               run: cd frontend && npx playwright install
-
-            # - name: Wait for database to start and migrate
-            #   run: sleep 120
 
             - name: Run Playwright E2E tests
               run: cd frontend && npm run test:playwright
