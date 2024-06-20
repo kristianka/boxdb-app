@@ -7,7 +7,7 @@ Full Stack application that let's you store box dimensions. Database hosted with
 - Backend made with TypeScript, Fastify, Prisma!
 - Uses Microsoft SQL Server 2019 Express so Siemens 1200 PLC can connect to it.
 - Project uses prettier and eslint for code guidelines.
-- Headless testing done with Vitest and E2E tests will be done with Playwright!
+- Headless testing done with Vitest and E2E tests done with Playwright!
 - Fully dockerized, needs only two `.env` files for setup!
 
 ### Frontend features
